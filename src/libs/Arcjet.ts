@@ -1,4 +1,5 @@
 import arcjet, { shield } from '@arcjet/next';
+
 import { Env } from './Env';
 import { logger } from './Logger';
 
