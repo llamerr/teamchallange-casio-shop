@@ -3,6 +3,7 @@ import nextPlugin from '@next/eslint-plugin-next';
 import jestDom from 'eslint-plugin-jest-dom';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import playwright from 'eslint-plugin-playwright';
+import sortImports from 'eslint-plugin-simple-import-sort';
 import tailwind from 'eslint-plugin-tailwindcss';
 import testingLibrary from 'eslint-plugin-testing-library';
 
@@ -32,6 +33,15 @@ export default antfu({
   rules: {
     ...nextPlugin.configs.recommended.rules,
     ...nextPlugin.configs['core-web-vitals'].rules,
+  },
+}, {
+  plugins: {
+    'simple-import-sort': sortImports,
+  },
+  rules: {
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': 'error',
+    'perfectionist/sort-imports': 'off',
   },
 }, {
   files: [
