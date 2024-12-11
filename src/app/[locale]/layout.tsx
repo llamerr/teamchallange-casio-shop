@@ -1,12 +1,14 @@
+import '@/styles/global.css';
+
 import type { Metadata } from 'next';
-import { DemoBadge } from '@/components/DemoBadge';
+import { notFound } from 'next/navigation';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
+
+import { ThemeProvider } from '@/components/theme-provider';
 import arcjet, { detectBot, request } from '@/libs/Arcjet';
 import { Env } from '@/libs/Env';
 import { routing } from '@/libs/i18nNavigation';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import '@/styles/global.css';
 
 export const metadata: Metadata = {
   icons: [
@@ -86,15 +88,20 @@ export default async function RootLayout(props: {
   // which dynamically adds a `style` attribute to the body tag.
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <NextIntlClientProvider
           locale={locale}
           messages={messages}
         >
-          {props.children}
-
-          <DemoBadge />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {props.children}
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

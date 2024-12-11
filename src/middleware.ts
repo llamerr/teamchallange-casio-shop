@@ -1,6 +1,7 @@
-import type { NextFetchEvent, NextRequest } from 'next/server';
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import type { NextFetchEvent, NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
+
 import { routing } from './libs/i18nNavigation';
 
 const intlMiddleware = createMiddleware(routing);

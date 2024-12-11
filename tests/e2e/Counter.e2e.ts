@@ -1,4 +1,5 @@
 import assert from 'node:assert';
+
 import { faker } from '@faker-js/faker';
 import { expect, test } from '@playwright/test';
 

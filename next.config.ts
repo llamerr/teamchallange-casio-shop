@@ -1,7 +1,8 @@
+import './src/libs/Env';
+
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
-import './src/libs/Env';
 
 const withNextIntl = createNextIntlPlugin('./src/libs/i18n.ts');
 

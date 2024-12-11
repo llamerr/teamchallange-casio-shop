@@ -1,4 +1,5 @@
 import { getRequestConfig } from 'next-intl/server';
+
 import { routing } from './i18nNavigation';
 
 // NextJS Boilerplate uses Crowdin as the localization software.
