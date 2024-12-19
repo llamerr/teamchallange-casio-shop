@@ -11,7 +11,7 @@ export default async function ProductLayout(props: {
 
   return (
     <ShopTemplate>
-      <div className="py-5 text-xl [&_p]:my-6">{props.children}</div>
+      {props.children}
     </ShopTemplate>
   );
 }

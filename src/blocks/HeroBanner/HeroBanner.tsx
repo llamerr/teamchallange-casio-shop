@@ -1,77 +1,77 @@
-import { Heart, ShoppingBag } from 'lucide-react';
-import Image from 'next/image';
+'use client';
 
-import { Badge } from '@/components/ui/badge';
+import { ChevronRight, Pause, Play } from 'lucide-react';
+import Link from 'next/link';
+import { useRef, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 
 export function HeroBanner() {
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+        videoRef.current.volume = 0.5;
+        videoRef.current.muted = false;
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
-    <div className="bg-slate-950 text-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid items-center gap-8 md:grid-cols-2">
-          {/* Product Image */}
-          <div className="relative aspect-square">
-            <Image
-              src="/placeholder.svg"
-              alt="Casio Unisex Watch"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
+    <section className="relative flex h-[900px] w-full items-center overflow-hidden">
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        className="absolute inset-0 size-full object-cover"
+      >
+        <source src="https://utfs.io/f/oM0zaDGq1OeYuzVjJqkOwsazxZgkH7CmI6byMJqi5WTXrdcl" type="video/mp4" />
+      </video>
 
-          {/* Product Info */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-white/10">Bestsellers</Badge>
-              <Badge variant="outline" className="bg-white/10">Limited</Badge>
-              <Button variant="ghost" size="icon" className="ml-auto">
-                <Heart className="size-5" />
-              </Button>
-            </div>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/60" />
 
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold">Casio Unisex Watches</h1>
-              <div className="uppercase text-slate-400">VINTAGE</div>
-              <div className="flex items-center gap-2">
-                <span>39×38×7 mm</span>
-                <button className="text-slate-400 hover:text-white" type="button">
-                  <span className="sr-only">Dimensions information</span>
-                  ⓘ
-                </button>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div>3 colors: Gold</div>
-              <div className="flex gap-2">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="size-12 overflow-hidden rounded-lg bg-white/10">
-                    <Image
-                      src="/placeholder.svg"
-                      alt={`Color variant ${i}`}
-                      width={48}
-                      height={48}
-                      className="size-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-baseline gap-2">
-                <span className="text-red-500 line-through">$120</span>
-                <span className="text-2xl font-bold">$95.00</span>
-              </div>
-              <Button className="group w-full" variant="outline">
-                Compare
-                <ShoppingBag className="ml-2 size-4 opacity-70 group-hover:opacity-100" />
-              </Button>
-            </div>
-          </div>
+      {/* Content */}
+      <div className="relative z-10 flex h-full max-w-3xl flex-col items-start justify-center px-12 text-3xl text-gray-300">
+        <p className="">Hurry, offers end soon!</p>
+        <h1 className="mt-4 text-5xl tracking-tight text-white">
+          Black Friday 30% Off
+        </h1>
+        <p className="mt-4">
+          Unlock exclusive discounts with promo code BLACKFRIDAY.
+        </p>
+        <div className="mt-8 flex items-end gap-5">
+          {/* Play/Pause Button */}
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={togglePlay}
+            className="bg-transparent px-3 text-white"
+            aria-label={isPlaying ? 'Pause video' : 'Play video'}
+          >
+            {isPlaying ? <Pause /> : <Play />}
+          </Button>
+          {/* Shop Now Button */}
+          <Link href="/collections">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-64 justify-between bg-white px-4 text-black"
+            >
+              Shop Now
+              <ChevronRight className="ml-2 size-4" />
+            </Button>
+          </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
