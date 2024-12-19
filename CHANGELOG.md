@@ -1,3 +1,10 @@
+# 1.0.0 (2024-12-19)
+
+
+### Features
+
+* update HeroBanner ([596d3d6](https://github.com/llamerr/teamchallange-casio-shop/commit/596d3d6b79e16c05ab417651f92db3ea9a6cb6af))
+
 ## [3.60.1](https://github.com/ixartz/Next-js-Boilerplate/compare/v3.60.0...v3.60.1) (2024-11-26)
 
 
