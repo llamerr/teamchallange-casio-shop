@@ -1,6 +1,7 @@
 import '@/styles/global.css';
 
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -9,6 +10,12 @@ import { ThemeProvider } from '@/components/theme-provider';
 import arcjet, { detectBot, request } from '@/libs/Arcjet';
 import { Env } from '@/libs/Env';
 import { routing } from '@/libs/i18nNavigation';
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   icons: [
@@ -88,7 +95,7 @@ export default async function RootLayout(props: {
   // which dynamically adds a `style` attribute to the body tag.
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className={`${inter.variable} font-sans`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         <NextIntlClientProvider
           locale={locale}
