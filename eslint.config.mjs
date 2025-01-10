@@ -1,5 +1,6 @@
 import antfu from '@antfu/eslint-config';
 import nextPlugin from '@next/eslint-plugin-next';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 import jestDom from 'eslint-plugin-jest-dom';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import playwright from 'eslint-plugin-playwright';
@@ -26,7 +27,7 @@ export default antfu({
     'migrations/**/*',
     'next-env.d.ts',
   ],
-}, ...tailwind.configs['flat/recommended'], jsxA11y.flatConfigs.recommended, {
+}, ...pluginQuery.configs['flat/recommended'], ...tailwind.configs['flat/recommended'], jsxA11y.flatConfigs.recommended, {
   plugins: {
     '@next/next': nextPlugin,
   },
@@ -57,6 +58,8 @@ export default antfu({
   ...playwright.configs['flat/recommended'],
 }, {
   rules: {
+    'react/no-array-index-key': 'off', // Allow array index keys
+    'eslint-comments/no-unlimited-disable': 'warn', // Allow disabling whole files, for MSW-worker
     'antfu/no-top-level-await': 'off', // Allow top-level await
     'style/brace-style': ['error', '1tbs'], // Use the default brace style
     'ts/consistent-type-definitions': ['error', 'type'], // Use `type` instead of `interface`

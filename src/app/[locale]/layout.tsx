@@ -6,10 +6,19 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 
+import { QueryProvider } from '@/components/query-providers';
 import { ThemeProvider } from '@/components/theme-provider';
 import arcjet, { detectBot, request } from '@/libs/Arcjet';
 import { Env } from '@/libs/Env';
 import { routing } from '@/libs/i18nNavigation';
+
+import { MSWProvider } from './msw-provider';
+
+if (process.env.NEXT_RUNTIME === 'nodejs') {
+  import('@/mocks/node').then(async ({ server }) => {
+    server.listen();
+  });
+}
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
@@ -107,7 +116,11 @@ export default async function RootLayout(props: {
             enableSystem
             disableTransitionOnChange
           >
-            {props.children}
+            <MSWProvider>
+              <QueryProvider>
+                {props.children}
+              </QueryProvider>
+            </MSWProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
