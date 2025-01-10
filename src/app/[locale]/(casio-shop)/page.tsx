@@ -1,8 +1,17 @@
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
+import { GenderBlock } from '@/blocks/GenderBlock/GenderBlock';
 import { HeroBanner } from '@/blocks/HeroBanner/HeroBanner';
-import ProductCollections from '@/blocks/ProductCollections/ProductCollections';
-import { SimilarProducts } from '@/blocks/SimilarProducts/SimilarProducts';
+import { NewArrivals } from '@/blocks/NewArrivals/NewArrivals';
+import { ProductCollections } from '@/blocks/ProductCollections/ProductCollections';
+import { TrustBlock } from '@/blocks/TrustBlock/TrustBlock';
+import { fetchCollections } from '@/services/api/dto/Collection.query';
+import { fetchNewProducts } from '@/services/api/dto/Product.query';
 
 type IIndexProps = {
   params: Promise<{ locale: string }>;
@@ -25,13 +34,27 @@ export default async function Index(props: IIndexProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const queryClient = new QueryClient();
+
+  queryClient.prefetchQuery({
+    queryKey: ['products', 'new'],
+    queryFn: fetchNewProducts,
+  });
+
+  queryClient.prefetchQuery({
+    queryKey: ['collections'],
+    queryFn: fetchCollections,
+  });
+
   return (
-    <>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <HeroBanner />
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto max-w-full px-20 py-12">
+        <TrustBlock />
+        <GenderBlock />
         <ProductCollections />
-        <SimilarProducts />
+        <NewArrivals />
       </div>
-    </>
+    </HydrationBoundary>
   );
 };
