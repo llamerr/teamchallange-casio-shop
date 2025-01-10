@@ -25,7 +25,7 @@ export function HeroBanner() {
   };
 
   return (
-    <section className="relative flex h-[900px] w-full items-center overflow-hidden">
+    <section className="relative flex aspect-[2.13/1] w-full items-center overflow-hidden">
       <video
         ref={videoRef}
         autoPlay
