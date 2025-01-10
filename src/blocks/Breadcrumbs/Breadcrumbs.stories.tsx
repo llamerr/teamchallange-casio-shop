@@ -3,16 +3,12 @@ import { NextIntlClientProvider } from 'next-intl';
 
 import messages from '@/locales/en.json';
 
-import { Logo } from './Logo';
+import { Breadcrumbs } from './Breadcrumbs';
 
 const meta = {
-  title: 'Components/Header/Logo',
-  component: Logo,
+  title: 'Blocks/Breadcrumbs',
+  component: Breadcrumbs,
   argTypes: {
-    variant: {
-      options: ['dark', 'light'],
-      control: { type: 'radio' },
-    },
   },
   tags: ['autodocs'],
   decorators: [
@@ -22,19 +18,11 @@ const meta = {
       </NextIntlClientProvider>
     ),
   ],
-} satisfies Meta<typeof Logo>;
+} satisfies Meta<typeof Breadcrumbs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LogoDark = {
-  args: {
-    variant: 'dark',
-  },
-} satisfies Story;
-
-export const LogoLight = {
-  args: {
-    variant: 'light',
-  },
+export const BreadcrumbsDefault = {
+  args: {},
 } satisfies Story;

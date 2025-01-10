@@ -9,9 +9,6 @@ import { BaseTemplate } from './BaseTemplate';
 const meta = {
   title: 'Example/BaseTemplate',
   component: BaseTemplate,
-  parameters: {
-    layout: 'fullscreen',
-  },
   tags: ['autodocs'],
   decorators: [
     Story => (

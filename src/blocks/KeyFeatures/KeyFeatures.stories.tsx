@@ -3,16 +3,12 @@ import { NextIntlClientProvider } from 'next-intl';
 
 import messages from '@/locales/en.json';
 
-import { Logo } from './Logo';
+import { KeyFeatures } from './KeyFeatures';
 
 const meta = {
-  title: 'Components/Header/Logo',
-  component: Logo,
+  title: 'Blocks/KeyFeatures',
+  component: KeyFeatures,
   argTypes: {
-    variant: {
-      options: ['dark', 'light'],
-      control: { type: 'radio' },
-    },
   },
   tags: ['autodocs'],
   decorators: [
@@ -22,19 +18,18 @@ const meta = {
       </NextIntlClientProvider>
     ),
   ],
-} satisfies Meta<typeof Logo>;
+  parameters: {
+    docs: {
+      description: {
+        component: 'KeyFeatures is used on Homepage.',
+      },
+    },
+  },
+} satisfies Meta<typeof KeyFeatures>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LogoDark = {
-  args: {
-    variant: 'dark',
-  },
-} satisfies Story;
-
-export const LogoLight = {
-  args: {
-    variant: 'light',
-  },
+export const KeyFeaturesDefault = {
+  args: {},
 } satisfies Story;
