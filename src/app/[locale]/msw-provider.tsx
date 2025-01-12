@@ -3,7 +3,10 @@
 import { Suspense, use } from 'react';
 
 import { collectionsHandlers } from '@/services/api/dto/Collection.mock';
+import { newsHandlers } from '@/services/api/dto/News.mock';
 import { productHandlers } from '@/services/api/dto/Product.mock';
+
+export const handlers = [...productHandlers, ...collectionsHandlers, ...newsHandlers];
 
 const mockingEnabledPromise
   = typeof window !== 'undefined'
@@ -16,7 +19,7 @@ const mockingEnabledPromise
           print.warning();
         },
       });
-      worker.use(...productHandlers, ...collectionsHandlers);
+      worker.use(...handlers);
 
       // eslint-disable-next-line no-console
       console.log(worker.listHandlers());

@@ -40,6 +40,7 @@
     "@spotlightjs/spotlight": "^2.6.3",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tanstack/react-query": "^5.62.11",
+    "@uidotdev/usehooks": "^2.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.36.4",
@@ -59,6 +60,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.11.2",
+    "@chromatic-com/storybook": "^3.2.3",
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@commitlint/cz-commitlint": "^19.5.0",
@@ -82,6 +84,7 @@
     "@storybook/react": "^8.4.7",
     "@storybook/test": "^8.4.7",
     "@storybook/test-runner": "^0.21.0",
+    "@storybook/theming": "^8.4.7",
     "@tanstack/eslint-plugin-query": "^5.62.9",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
