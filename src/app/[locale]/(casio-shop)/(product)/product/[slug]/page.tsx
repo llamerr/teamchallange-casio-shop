@@ -1,14 +1,19 @@
+import { QueryClient } from '@tanstack/react-query';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { Breadcrumbs } from '@/blocks/Breadcrumbs/Breadcrumbs';
-import { HeroBanner } from '@/blocks/HeroBanner/HeroBanner';
+import { HeroProduct } from '@/blocks/HeroProduct/HeroProduct';
 import { KeyFeatures } from '@/blocks/KeyFeatures/KeyFeatures';
 import { ProductGallery } from '@/blocks/ProductGallery/ProductGallery';
 import { ProductTabs } from '@/blocks/ProductTabs/ProductTabs';
 import { SimilarProducts } from '@/blocks/SimilarProducts/SimilarProducts';
+import { fetchProduct } from '@/services/api/dto/Product.query';
 
 type IIndexProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{
+    slug: string;
+    locale: string;
+  }>;
 };
 
 export async function generateMetadata(props: IIndexProps) {
@@ -25,12 +30,27 @@ export async function generateMetadata(props: IIndexProps) {
 }
 
 export default async function Index(props: IIndexProps) {
-  const { locale } = await props.params;
+  const { slug, locale } = await props.params;
   setRequestLocale(locale);
+
+  const queryClient = new QueryClient();
+
+  const product = await queryClient.fetchQuery({
+    queryKey: ['product', slug],
+    queryFn: () => fetchProduct(slug),
+  });
+
+  if (!product) {
+    return (
+      <div className="container mx-auto px-4 py-6">
+        <h1 className="text-2xl font-bold">Product not found</h1>
+      </div>
+    );
+  }
 
   return (
     <>
-      <HeroBanner />
+      <HeroProduct image={product.image} />
       <div className="container mx-auto px-4 py-6">
         <Breadcrumbs />
         <div className="mt-8">
