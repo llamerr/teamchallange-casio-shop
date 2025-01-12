@@ -1,5 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
+import { Env } from '@/libs/Env';
+
 import type { NewsDTO } from './News.dto';
 
 export const news: NewsDTO[] = [
@@ -48,7 +50,7 @@ export const news: NewsDTO[] = [
 ];
 
 export const newsHandlers = [
-  http.get('/api/news', () => {
+  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/news`, () => {
     return HttpResponse.json(news);
   }),
 ];

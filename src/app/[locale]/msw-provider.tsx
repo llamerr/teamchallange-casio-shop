@@ -2,6 +2,7 @@
 
 import { Suspense, use } from 'react';
 
+import { Env } from '@/libs/Env';
 import { collectionsHandlers } from '@/services/api/dto/Collection.mock';
 import { newsHandlers } from '@/services/api/dto/News.mock';
 import { productHandlers } from '@/services/api/dto/Product.mock';
@@ -13,15 +14,9 @@ const mockingEnabledPromise
     ? import('@/mocks/browser').then(async ({ worker }) => {
       await worker.start({
         onUnhandledRequest(request, print) {
-          if (request.url.includes('_next')
-            || request.url.includes('utfs.io')
-            || request.url.includes('qujblijcjy.ufs.sh')
-            || request.url.includes('picsum.photos')
-            || request.url === 'http://localhost:8969/contextlines'
-          ) {
-            return;
+          if (Env.NEXT_PUBLIC_API_URL && request.url.startsWith(Env.NEXT_PUBLIC_API_URL)) {
+            print.warning();
           }
-          print.warning();
         },
       });
       worker.use(...handlers);

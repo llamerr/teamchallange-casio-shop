@@ -59,6 +59,7 @@ export const ProductCardLight = {
     badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
     image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
     title: 'Casio Baby-G BA-110',
+    slug: 'casio-baby-g-ba-110',
     collection: 'SOLAR POWERED',
     size: '43 mm',
     colors: 5,
@@ -73,6 +74,7 @@ export const ProductCardDark = {
     badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
     image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
     title: 'Casio Baby-G BA-110',
+    slug: 'casio-baby-g-ba-110',
     collection: 'SOLAR POWERED',
     size: '43 mm',
     colors: 5,
@@ -85,6 +87,7 @@ export const ProductCardWithoutImage = {
   args: {
     badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
     title: 'Casio Baby-G BA-110',
+    slug: 'casio-baby-g-ba-110',
     collection: 'SOLAR POWERED',
     size: '43 mm',
     colors: 5,

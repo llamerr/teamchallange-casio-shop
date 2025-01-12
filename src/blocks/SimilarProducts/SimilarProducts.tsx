@@ -33,10 +33,11 @@ export function SimilarProducts() {
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {data && data.map(product => (
           <ProductCard
-            key={product.productId}
+            key={product.id}
             badges={product.badges}
             image={product.image}
             title={product.title}
+            slug={product.slug}
             collection={product.collection}
             size={product.size}
             colors={product.colors}

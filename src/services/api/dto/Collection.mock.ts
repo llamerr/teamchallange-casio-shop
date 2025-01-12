@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
+import { Env } from '@/libs/Env';
 import type { CollectionDTO } from '@/services/api/dto/Collection.dto';
 
 export const collections: CollectionDTO[] = [
@@ -41,7 +42,7 @@ export const collections: CollectionDTO[] = [
 ];
 
 export const collectionsHandlers = [
-  http.get('/api/collections', () => {
+  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/collections`, () => {
     return HttpResponse.json(collections);
   }),
 ];

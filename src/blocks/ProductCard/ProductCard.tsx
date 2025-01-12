@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import type { ProductDTO } from '@/services/api/dto/Product.dto';
 
-type ProductCardProps = Omit<ProductDTO, 'productId'> & {
+type ProductCardProps = Omit<ProductDTO, 'id'> & {
   variant?: 'light' | 'dark';
 };
 
@@ -17,6 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
   badges,
   image,
   title,
+  slug,
   collection,
   size,
   colors,
@@ -62,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
         </div>
         <div className="space-y-2">
           <h3 className="text-xl font-medium leading-tight">
-            <Link href="/product/124">
+            <Link href={`/product/${slug}`}>
               {title}
             </Link>
           </h3>

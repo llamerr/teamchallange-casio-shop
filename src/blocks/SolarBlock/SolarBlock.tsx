@@ -37,11 +37,12 @@ export function SolarBlock({ className }: SolarBlockProps) {
           ))}
           {data && data.map(product => (
             <ProductCard
+              key={product.id}
               variant="dark"
-              key={product.productId}
               badges={product.badges}
               image={product.image}
               title={product.title}
+              slug={product.slug}
               collection={product.collection}
               size={product.size}
               colors={product.colors}

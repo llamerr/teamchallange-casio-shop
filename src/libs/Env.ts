@@ -16,6 +16,7 @@ export const Env = createEnv({
   },
   shared: {
     NODE_ENV: z.enum(['test', 'development', 'production']).optional(),
+    NEXT_PUBLIC_API_URL: z.string().optional(),
   },
   // You need to destructure all the keys manually
   runtimeEnv: {
@@ -28,5 +29,6 @@ export const Env = createEnv({
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
 });
