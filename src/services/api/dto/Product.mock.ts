@@ -2,6 +2,53 @@ import { http, HttpResponse } from 'msw';
 
 import type { ProductDTO } from '@/services/api/dto/Product.dto';
 
+export const products: ProductDTO[] = [
+  {
+    badges: ['Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant'],
+    image: '',
+    title: 'Casio is dedicated to environmental',
+    collection: 'ATOMIC TIMEKEEPING',
+    size: '40 mm',
+    colors: 3,
+    price: 95.00,
+    originalPrice: 120.00,
+    productId: 'JY8146-54A',
+  },
+  {
+    badges: ['Bestsellers', 'New', 'Water Resistant'],
+    image: 'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYGkWs1dI08fdOtvRu97WAj52QYbrI6VEZSXek',
+    title: 'Casio is dedicated to environmental',
+    collection: 'ATOMIC TIMEKEEPING',
+    size: '40 mm',
+    colors: 3,
+    price: 95.00,
+    originalPrice: 120.00,
+    productId: 'JY8146-54B',
+  },
+  {
+    badges: ['Touch Solar', 'Water Resistant', 'Limited', 'Bluetooth'],
+    image: 'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYeUSprUVwfRYkBsbaEu4no9jiThQlW2rM1xK0',
+    title: 'Casio is dedicated to environmental',
+    collection: 'ATOMIC TIMEKEEPING',
+    size: '40 mm',
+    colors: 3,
+    price: 95.00,
+    originalPrice: 120.00,
+    productId: 'JY8146-54E',
+  },
+  {
+    badges: [],
+    image: 'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYr2bvTWasc69rf2RoHl3GiBVvn0yOIeJgxFdZ',
+    title: 'Casio - Innovation Meets Style',
+    collection: 'SOLAR POWERED',
+    size: '42 mm',
+    colors: 5,
+    price: 110.00,
+    originalPrice: 150.00,
+    productId: 'AB1234-XY',
+  },
+];
+
 export const similarProducts: ProductDTO[] = [
   {
     badges: ['Limited', 'Bluetooth'],
@@ -97,6 +144,9 @@ export const newProducts: ProductDTO[] = [
 ];
 
 export const productHandlers = [
+  http.get('/api/products', () => {
+    return HttpResponse.json(products);
+  }),
   http.get('/api/products/similar', () => {
     return HttpResponse.json(similarProducts);
   }),
