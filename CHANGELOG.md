@@ -1,3 +1,25 @@
+# [1.1.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.0.0...v1.1.0) (2025-01-12)
+
+
+### Features
+
+* add fira code font ([a9b358e](https://github.com/llamerr/teamchallange-casio-shop/commit/a9b358e9722d8d644ae2f00d9453965b61141908))
+* add gender-block and gender-card ([73703cd](https://github.com/llamerr/teamchallange-casio-shop/commit/73703cda13c5f210114849b9b06575381a5b0e98))
+* add generic skeleton component ([a351a76](https://github.com/llamerr/teamchallange-casio-shop/commit/a351a7635044c29509ccd9598c0e4b359236ba88))
+* add hero banner ([6d2dc12](https://github.com/llamerr/teamchallange-casio-shop/commit/6d2dc12d65f5a228725c11dbc6b56474adfed276))
+* add new arrivals block ([cd45dbf](https://github.com/llamerr/teamchallange-casio-shop/commit/cd45dbf142c50a5f195d5d348ab1f205e4f5e248))
+* add news block/card and dto/query/mock ([7c07152](https://github.com/llamerr/teamchallange-casio-shop/commit/7c071525427a3d55ee5c56e346bba6715bf58896))
+* add product card ([172cce6](https://github.com/llamerr/teamchallange-casio-shop/commit/172cce6f7e2d62fb5f6591c26215bab2d711d7e0))
+* add product collections ([ccc4d76](https://github.com/llamerr/teamchallange-casio-shop/commit/ccc4d76c692e633da5156483a5a94d0d82d0d776))
+* add Section component ([b9445b9](https://github.com/llamerr/teamchallange-casio-shop/commit/b9445b97335d828eef87702abc413a3515dcd75c))
+* add solar block ([b8c7b7e](https://github.com/llamerr/teamchallange-casio-shop/commit/b8c7b7e47911cadb964f3c15daa8b74034a82eb3))
+* add tanstack-query and mswjs to nextjs and storybook ([f6e63bd](https://github.com/llamerr/teamchallange-casio-shop/commit/f6e63bd0ad95b2676671e882d3e5d4c2ce1f99c5))
+* add trust block ([4cd70e3](https://github.com/llamerr/teamchallange-casio-shop/commit/4cd70e3fffe3a5c6812a86c0309528ade09dd355))
+* add useVideoPlayer hook ([ed66f89](https://github.com/llamerr/teamchallange-casio-shop/commit/ed66f8945f998c3c4e1dec8f1cc80ac0900bcedf))
+* update home page ([8caf980](https://github.com/llamerr/teamchallange-casio-shop/commit/8caf980d58b7218aaf103e58792c397cc7206a4b))
+* update page with new blocks ([c040fcc](https://github.com/llamerr/teamchallange-casio-shop/commit/c040fcc674af23c419b48ce00c73b894a1e1cbcd))
+* update similar products ([d2b5d2a](https://github.com/llamerr/teamchallange-casio-shop/commit/d2b5d2a898f19d13719016c15e9c3fac5c7ddb23))
+
 # 1.0.0 (2024-12-19)
 
 
