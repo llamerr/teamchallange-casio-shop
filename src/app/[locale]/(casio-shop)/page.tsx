@@ -8,10 +8,13 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { GenderBlock } from '@/blocks/GenderBlock/GenderBlock';
 import { HeroBanner } from '@/blocks/HeroBanner/HeroBanner';
 import { NewArrivals } from '@/blocks/NewArrivals/NewArrivals';
+import { NewsBlock } from '@/blocks/NewsBlock/NewsBlock';
 import { ProductCollections } from '@/blocks/ProductCollections/ProductCollections';
+import { SolarBlock } from '@/blocks/SolarBlock/SolarBlock';
 import { TrustBlock } from '@/blocks/TrustBlock/TrustBlock';
 import { fetchCollections } from '@/services/api/dto/Collection.query';
-import { fetchNewProducts } from '@/services/api/dto/Product.query';
+import { fetchNewsList } from '@/services/api/dto/News.query';
+import { fetchNewProducts, fetchProducts } from '@/services/api/dto/Product.query';
 
 type IIndexProps = {
   params: Promise<{ locale: string }>;
@@ -37,23 +40,39 @@ export default async function Index(props: IIndexProps) {
   const queryClient = new QueryClient();
 
   queryClient.prefetchQuery({
+    queryKey: ['collections'],
+    queryFn: fetchCollections,
+  });
+
+  queryClient.prefetchQuery({
     queryKey: ['products', 'new'],
     queryFn: fetchNewProducts,
   });
 
   queryClient.prefetchQuery({
-    queryKey: ['collections'],
-    queryFn: fetchCollections,
+    queryKey: ['products'],
+    queryFn: fetchProducts,
+  });
+
+  queryClient.prefetchQuery({
+    queryKey: ['news'],
+    queryFn: fetchNewsList,
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <HeroBanner />
-      <div className="container mx-auto max-w-full px-20 py-12">
-        <TrustBlock />
-        <GenderBlock />
-        <ProductCollections />
-        <NewArrivals />
+      <div className="container mx-auto max-w-full py-12">
+        <TrustBlock
+          title="We are the Official Dealer Casio in Ukraine."
+          description="Guaranteed quality and service you can trust."
+          className="mx-20"
+        />
+        <GenderBlock className="mx-20" />
+        <ProductCollections className="mx-20" />
+        <NewArrivals className="mx-20" />
+        <SolarBlock />
+        <NewsBlock className="mx-20" />
       </div>
     </HydrationBoundary>
   );
