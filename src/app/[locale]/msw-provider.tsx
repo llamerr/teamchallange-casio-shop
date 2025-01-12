@@ -13,7 +13,12 @@ const mockingEnabledPromise
     ? import('@/mocks/browser').then(async ({ worker }) => {
       await worker.start({
         onUnhandledRequest(request, print) {
-          if (request.url.includes('_next')) {
+          if (request.url.includes('_next')
+            || request.url.includes('utfs.io')
+            || request.url.includes('qujblijcjy.ufs.sh')
+            || request.url.includes('picsum.photos')
+            || request.url === 'http://localhost:8969/contextlines'
+          ) {
             return;
           }
           print.warning();

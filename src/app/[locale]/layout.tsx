@@ -18,7 +18,12 @@ if (process.env.NEXT_RUNTIME === 'nodejs') {
   import('@/mocks/node').then(async ({ server }) => {
     server.listen({
       onUnhandledRequest(request, print) {
-        if (request.url.includes('_next') || request.url === 'http://localhost:8969/stream') {
+        if (request.url.includes('_next')
+          || request.url.includes('utfs.io')
+          || request.url.includes('qujblijcjy.ufs.sh')
+          || request.url.includes('picsum.photos')
+          || request.url === 'http://localhost:8969/stream'
+        ) {
           return;
         }
         print.warning();
