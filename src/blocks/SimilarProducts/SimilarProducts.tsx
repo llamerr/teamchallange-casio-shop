@@ -1,62 +1,50 @@
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+'use client';
+
+import React from 'react';
 
 import { ProductCard } from '@/blocks/ProductCard/ProductCard';
-
-const similarProducts = [
-  {
-    badges: ['Limited', 'Bluetooth'],
-    image: '/placeholder.svg',
-    title: 'Casio is dedicated to environmental',
-    category: 'ATOMIC TIMEKEEPING',
-    size: '40 mm',
-    colors: 3,
-    price: 95.00,
-    originalPrice: 120.00,
-    productId: 'JY8146-54E',
-  },
-  {
-    badges: ['Bestsellers', 'New'],
-    image: '/placeholder.svg',
-    title: 'Casio is dedicated to environmental',
-    category: 'ATOMIC TIMEKEEPING',
-    size: '40 mm',
-    colors: 3,
-    price: 95.00,
-    originalPrice: 120.00,
-    productId: 'JY8146-54E',
-  },
-  {
-    badges: ['Touch Solar'],
-    image: '/placeholder.svg',
-    title: 'Casio is dedicated to environmental',
-    category: 'ATOMIC TIMEKEEPING',
-    size: '40 mm',
-    colors: 3,
-    price: 95.00,
-    originalPrice: 120.00,
-    productId: 'JY8146-54E',
-  },
-];
+import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
+import { Section } from '@/components/Section/Section';
+import { useSimilarProducts } from '@/services/api/dto/Product.query';
 
 export function SimilarProducts() {
+  const { data, error, isLoading } = useSimilarProducts();
+
+  if (isLoading) {
+    return (
+      <Section title="Similar Watches" link={{ href: '/watches', label: 'View all' }}>
+        {Array.from({ length: 4 }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
+      </Section>
+    );
+  }
+
+  if (error instanceof Error) {
+    return (
+      <Section title="Similar Watches">
+        <p>{error.message}</p>
+      </Section>
+    );
+  }
+
   return (
-    <section className="py-8">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-bold">SIMILAR WATCHES</h2>
-        <Link
-          href="/watches"
-          className="inline-flex items-center gap-1 text-sm font-medium hover:text-slate-700"
-        >
-          View all
-          <ArrowRight className="size-4" />
-        </Link>
-      </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {similarProducts.map((product, index) => (
-          <ProductCard key={index} {...product} />
+    <Section title="Similar Watches" link={{ href: '/watches', label: 'View all' }}>
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {data && data.map(product => (
+          <ProductCard
+            key={product.productId}
+            badges={product.badges}
+            image={product.image}
+            title={product.title}
+            collection={product.collection}
+            size={product.size}
+            colors={product.colors}
+            price={product.price}
+            originalPrice={product.originalPrice}
+          />
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
