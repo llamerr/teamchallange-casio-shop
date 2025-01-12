@@ -1,7 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NextIntlClientProvider } from 'next-intl';
-
-import messages from '@/locales/en.json';
 
 import { GenderBlock } from './GenderBlock';
 
@@ -10,18 +7,12 @@ const meta = {
   component: GenderBlock,
   argTypes: {
   },
-  tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
-  ],
   parameters: {
     docs: {
       description: {
-        component: 'GenderBlock uses [GenderCard](?path=/docs/components-genderblock-gendercard--docs) component.',
+        component:
+        'GenderBlock is used on Homepage.<br/>'
+        + 'GenderBlock uses [GenderCard](?path=/docs/components-genderblock-gendercard--docs) component.',
       },
     },
   },

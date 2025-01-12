@@ -1,6 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+import { cn } from '@/lib/utils';
+
 type SectionProps = {
   title: string;
   link?: {
@@ -8,11 +10,12 @@ type SectionProps = {
     label: string;
   };
   children: React.ReactNode;
+  className?: string;
 };
 
-export const Section: React.FC<SectionProps> = function Section({ title, link, children }) {
+export const Section: React.FC<SectionProps> = function Section({ title, link, children, className }) {
   return (
-    <section className="py-8">
+    <section className={cn('py-8', className)}>
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-medium uppercase">{title}</h2>
         {link && (

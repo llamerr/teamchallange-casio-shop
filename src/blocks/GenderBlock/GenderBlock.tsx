@@ -1,10 +1,15 @@
 import React from 'react';
 
+import { cn } from '@/lib/utils';
+
 import { GenderCard } from './GenderCard';
 
-export function GenderBlock() {
+type GenderBlockProps = {
+  className?: string;
+};
+export function GenderBlock({ className }: GenderBlockProps) {
   return (
-    <section className="max-w-full">
+    <section className={cn('max-w-full', className)}>
       <div className="mx-auto my-12 grid grid-cols-1 gap-6 md:grid-cols-2">
         <GenderCard
           title="Men's Watches"

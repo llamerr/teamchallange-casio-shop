@@ -26,6 +26,14 @@ export default withSentryConfig(
             protocol: 'https',
             hostname: 'utfs.io',
           },
+          {
+            protocol: 'https',
+            hostname: 'qujblijcjy.ufs.sh',
+          },
+          {
+            protocol: 'https',
+            hostname: 'picsum.photos',
+          },
         ],
       },
     }),

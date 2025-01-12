@@ -6,6 +6,9 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      screens: {
+        xsm: '375px',
+      },
       fontFamily: {
         sans: ['var(--font-inter)'],
       },
@@ -55,6 +58,8 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         },
+        overlayGray: '#D2D5DF33',
+        darkBackground: '#14161A',
       },
     },
   },

@@ -1,7 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NextIntlClientProvider } from 'next-intl';
-
-import messages from '@/locales/en.json';
 
 import { Section } from './Section';
 
@@ -22,14 +19,6 @@ const meta = {
     },
     children: { control: 'text' },
   },
-  tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
-  ],
   parameters: {
     docs: {
       description: {

@@ -2,27 +2,12 @@
 
 import { ChevronRight, Pause, Play } from 'lucide-react';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 
 export function HeroBanner() {
-  const [isPlaying, setIsPlaying] = useState(true);
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-        videoRef.current.volume = 0.5;
-        videoRef.current.muted = false;
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
+  const { videoRef, togglePlay, isPlaying } = useVideoPlayer();
 
   return (
     <section className="relative flex aspect-[2.13/1] w-full items-center overflow-hidden">

@@ -1,22 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NextIntlClientProvider } from 'next-intl';
-
-import messages from '@/locales/en.json';
 
 import { TrustBlock } from './TrustBlock';
 
 const meta = {
   title: 'Blocks/TrustBlock',
   component: TrustBlock,
-  argTypes: {},
-  tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
-  ],
+  argTypes: {
+    title: {
+      type: 'string',
+      control: { type: 'text' },
+    },
+    description: {
+      type: 'string',
+      control: { type: 'text' },
+    },
+  },
   parameters: {
     docs: {
       description: {
@@ -29,4 +27,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const TrustBlockDefault = {} satisfies Story;
+export const TrustBlockDefault = {
+  args: {
+    title: 'Trust',
+    description: 'The G-Shock News is for those who refuse to back down from a challenge.',
+  },
+} satisfies Story;

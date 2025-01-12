@@ -1,7 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NextIntlClientProvider } from 'next-intl';
-
-import messages from '@/locales/en.json';
 
 import { Logo } from './Logo';
 
@@ -14,14 +11,13 @@ const meta = {
       control: { type: 'radio' },
     },
   },
-  tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
-  ],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Logo is used on Header.',
+      },
+    },
+  },
 } satisfies Meta<typeof Logo>;
 
 export default meta;

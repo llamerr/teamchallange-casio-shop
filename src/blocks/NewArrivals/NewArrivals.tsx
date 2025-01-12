@@ -7,30 +7,20 @@ import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
 import { Section } from '@/components/Section/Section';
 import { useNewProducts } from '@/services/api/dto/Product.query';
 
-export function NewArrivals() {
+type NewArrivalsProps = {
+  className?: string;
+};
+
+export function NewArrivals({ className }: NewArrivalsProps) {
   const { data, error, isLoading } = useNewProducts();
 
-  if (isLoading) {
-    return (
-      <Section title="New Arrivals" link={{ href: '/watches', label: 'View all' }}>
-        {Array.from({ length: 4 }).map((_, i) => (
+  return (
+    <Section title="New Arrivals" link={{ href: '/watches', label: 'View all' }} className={className}>
+      {error instanceof Error && <p>{error.message}</p>}
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {isLoading && Array.from({ length: 4 }).map((_, i) => (
           <ProductCardSkeleton key={i} />
         ))}
-      </Section>
-    );
-  }
-
-  if (error instanceof Error) {
-    return (
-      <Section title="New Arrivals" link={{ href: '/watches', label: 'View all' }}>
-        <p>{error.message}</p>
-      </Section>
-    );
-  }
-
-  return (
-    <Section title="New Arrivals" link={{ href: '/watches', label: 'View all' }}>
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {data && data.map(product => (
           <ProductCard
             key={product.productId}

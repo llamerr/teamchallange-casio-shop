@@ -1,7 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NextIntlClientProvider } from 'next-intl';
-
-import messages from '@/locales/en.json';
 
 import { Breadcrumbs } from './Breadcrumbs';
 
@@ -10,14 +7,13 @@ const meta = {
   component: Breadcrumbs,
   argTypes: {
   },
-  tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
-  ],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Breadcrumbs is used on all pages.',
+      },
+    },
+  },
 } satisfies Meta<typeof Breadcrumbs>;
 
 export default meta;
