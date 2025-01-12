@@ -16,7 +16,14 @@ import { MSWProvider } from './msw-provider';
 
 if (process.env.NEXT_RUNTIME === 'nodejs') {
   import('@/mocks/node').then(async ({ server }) => {
-    server.listen();
+    server.listen({
+      onUnhandledRequest(request, print) {
+        if (request.url.includes('_next') || request.url === 'http://localhost:8969/stream') {
+          return;
+        }
+        print.warning();
+      },
+    });
   });
 }
 
