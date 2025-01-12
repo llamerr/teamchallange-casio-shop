@@ -20,6 +20,22 @@ export default withSentryConfig(
       poweredByHeader: false,
       reactStrictMode: true,
       serverExternalPackages: ['@electric-sql/pglite'],
+      images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'utfs.io',
+          },
+          {
+            protocol: 'https',
+            hostname: 'qujblijcjy.ufs.sh',
+          },
+          {
+            protocol: 'https',
+            hostname: 'picsum.photos',
+          },
+        ],
+      },
     }),
   ),
   {

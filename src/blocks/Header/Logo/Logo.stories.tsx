@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NextIntlClientProvider } from 'next-intl';
-
-import messages from '@/locales/en.json';
 
 import { Logo } from './Logo';
 
 const meta = {
-  title: 'Example/Header/Logo',
+  title: 'Components/Header/Logo',
   component: Logo,
   argTypes: {
     variant: {
@@ -15,16 +12,12 @@ const meta = {
     },
   },
   parameters: {
-    layout: 'fullscreen',
+    docs: {
+      description: {
+        component: 'Logo is used on Header.',
+      },
+    },
   },
-  tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
-  ],
 } satisfies Meta<typeof Logo>;
 
 export default meta;

@@ -1,69 +1,98 @@
 'use client';
 
-import { Mail } from 'lucide-react';
+import { useHover } from '@uidotdev/usehooks';
+import { ImageIcon, Mail } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import type { ProductDTO } from '@/services/api/dto/Product.dto';
 
-export function ProductCard() {
-  const [isHovered, setIsHovered] = useState(false);
+type ProductCardProps = Omit<ProductDTO, 'productId'> & {
+  variant?: 'light' | 'dark';
+};
+
+export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
+  variant = 'light',
+  badges,
+  image,
+  title,
+  collection,
+  size,
+  colors,
+  price,
+  originalPrice,
+}) {
+  const [ref, isHovered] = useHover();
 
   return (
     <Card
-      className={`relative w-[300px] rounded-none border border-gray-200 shadow-none transition-colors
-        dark:border-gray-800 dark:bg-[#1F1F1F] ${isHovered ? 'dark:bg-[#0F0F0F]' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`relative aspect-[0.660/1] rounded-none border border-gray-200 shadow-none transition-colors
+        ${variant === 'dark' ? 'bg-[#1F1F1F]' : 'bg-white'}
+        ${isHovered ? (variant === 'dark' ? 'bg-[#0F0F0F]' : 'bg-gray-100') : ''}
+      `}
+      ref={ref}
     >
       <CardContent className="p-4">
         <div className="mb-4 flex flex-wrap gap-2">
-          {['Bestsellers', 'Limited', 'Touch Solar', 'Bluetooth', 'New'].map(badge => (
+          {badges.map(badge => (
             <span
               key={badge}
-              className="border border-gray-300 bg-white px-2 py-1 text-xs
-                dark:bg-white dark:text-black"
+              className={`border- border${variant === 'dark' ? 'gray-700' : 'gray-300'} bg-${variant === 'dark' ? 'gray-800' : 'white'} px-2 py-1 text-xs
+                ${variant === 'dark' ? 'text-white' : 'text-black'}
+              `}
             >
               {badge}
             </span>
           ))}
         </div>
-        <div className="relative mb-4 aspect-square bg-muted dark:bg-gray-800">
-          <Image
-            src="/placeholder.svg"
-            alt="Product image"
-            fill
-            className="object-cover"
-          />
+        <div className="relative mb-4 flex aspect-square items-center justify-center bg-muted dark:bg-gray-800">
+          {image && (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              sizes="33vw"
+              className="object-cover"
+            />
+          )}
+          {!image && (
+            <ImageIcon className="size-8" />
+          )}
         </div>
         <div className="space-y-2">
-          <h3 className="text-xl font-medium leading-tight dark:text-white">
+          <h3 className="text-xl font-medium leading-tight">
             <Link href="/product/124">
-              Casio is dedicated to environmental
+              {title}
             </Link>
           </h3>
-          <div className="text-sm text-muted-foreground dark:text-gray-400">
-            ATOMIC TIMEKEEPING
+          <div className={`text-sm ${variant === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
+            {collection}
           </div>
-          <div className="text-sm text-muted-foreground dark:text-gray-400">
-            40 mm | 3 Colors
+          <div className={`text-sm ${variant === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
+            {size}
+            {' '}
+            |
+            {colors}
           </div>
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4 pt-0">
         <div className="flex items-center gap-2">
-          <span className="text-xl font-bold dark:text-white">$95.00</span>
-          <span className="text-sm text-red-500 line-through dark:text-red-400">$120</span>
+          <span className="text-xl font-bold">
+            {price}
+          </span>
+          {originalPrice && <span className={`text-sm ${variant === 'dark' ? 'text-red-400' : 'text-red-500'} line-through`}>{originalPrice}</span>}
         </div>
         {isHovered && (
           <div className="flex gap-2">
-            <button className="border border-gray-300 bg-white px-4 py-2 text-sm text-black
-              dark:border-white"
+            <button className={`border- border${variant === 'dark' ? 'gray-700' : 'gray-300'} bg-${variant === 'dark' ? 'gray-800' : 'white'} px-4 py-2 text-sm
+              ${variant === 'dark' ? 'text-white' : 'text-black'}
+            `}
             >
               Compare
             </button>
-            <button className="bg-black p-2 text-white dark:bg-white dark:text-black">
+            <button className={`bg-${variant === 'dark' ? 'white' : 'black'} text- p-2${variant === 'dark' ? 'black' : 'white'}`}>
               <Mail className="size-4" />
             </button>
           </div>
@@ -71,4 +100,4 @@ export function ProductCard() {
       </CardFooter>
     </Card>
   );
-}
+};
