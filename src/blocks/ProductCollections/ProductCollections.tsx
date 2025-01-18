@@ -28,9 +28,7 @@ export function ProductCollections({ className }: ProductCollectionsProps) {
           <CollectionCard
             key={collection.id}
             href={`/collections/${collection.id}`}
-            title={collection.title}
-            description={collection.description}
-            image={collection.image}
+            {...collection}
           />
         ))}
       </div>

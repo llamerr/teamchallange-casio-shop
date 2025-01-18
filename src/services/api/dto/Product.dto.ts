@@ -5,6 +5,7 @@ export type ProductDTO = {
   title: string;
   slug: string;
   collection: string;
+  collectionSlug: string;
   size: string;
   colors: number;
   price: number;

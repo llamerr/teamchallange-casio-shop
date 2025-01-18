@@ -38,6 +38,7 @@ type Story = StoryObj<typeof meta>;
 export const CollectionCardWithImage = {
   args: {
     title: 'G-Shock',
+    slug: 'g-shock',
     description: 'Toughness meets bold style',
     href: '/collections/g-shock',
     image: 'https://utfs.io/f/oM0zaDGq1OeYGkWs1dI08fdOtvRu97WAj52QYbrI6VEZSXek',
@@ -47,6 +48,7 @@ export const CollectionCardWithImage = {
 export const CollectionCardWithoutImage = {
   args: {
     title: 'G-Shock',
+    slug: 'g-shock',
     description: 'Toughness meets bold style',
     href: '/collections/g-shock',
   },
@@ -55,6 +57,7 @@ export const CollectionCardWithoutImage = {
 export const CollectionCardLongTitleAndDescription = {
   args: {
     title: 'G-Shock: The Ultimate in Rugged Timekeeping Technology and Bold Design',
+    slug: 'g-shock-the-ultimate-in-rugged-timekeeping-technology-and-bold-design',
     description:
       'Toughness meets bold style. The G-Shock collection is for those who refuse to back down from a challenge. With its rugged design and advanced technology, it is the perfect timepiece for those who push themselves to the limit.',
     href: '/collections/g-shock',

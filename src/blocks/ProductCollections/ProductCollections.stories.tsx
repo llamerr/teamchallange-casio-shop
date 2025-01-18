@@ -38,6 +38,7 @@ type Story = StoryObj<typeof meta>;
 export const CollectionCardWithImage = {
   args: {
     title: 'G-Shock',
+    slug: 'g-shock',
     description: 'Toughness meets bold style',
     href: '/collections/g-shock',
     image: 'https://utfs.io/f/oM0zaDGq1OeYGkWs1dI08fdOtvRu97WAj52QYbrI6VEZSXek',

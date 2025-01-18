@@ -34,15 +34,7 @@ export function SimilarProducts() {
         {data && data.map(product => (
           <ProductCard
             key={product.id}
-            badges={product.badges}
-            image={product.image}
-            title={product.title}
-            slug={product.slug}
-            collection={product.collection}
-            size={product.size}
-            colors={product.colors}
-            price={product.price}
-            originalPrice={product.originalPrice}
+            {...product}
           />
         ))}
       </div>
