@@ -11,3 +11,41 @@ export type ProductDTO = {
   price: number;
   originalPrice?: number;
 };
+
+export type ProductDetailsDTO = ProductDTO & {
+  imagePromo: string;
+  basicInformation: {
+    sections: Array<{
+      title: string;
+      description: string;
+    }>;
+  };
+  specifications: {
+    specs: Array<{
+      label: string;
+      value: string;
+    }>;
+    features: string[];
+  };
+  deliveryAndReturns: {
+    shipping: {
+      title: string;
+      options: string[];
+    };
+    payment: {
+      title: string;
+      options: string[];
+    };
+    returns: {
+      title: string;
+      description: string;
+    };
+  };
+  manual: {
+    description: string;
+    list: Array<{
+      language: string;
+      url: string;
+    }>;
+  };
+};

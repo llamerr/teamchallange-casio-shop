@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Env } from '@/libs/Env';
 
-import type { ProductDTO } from './Product.dto';
+import type { ProductDetailsDTO, ProductDTO } from './Product.dto';
 
 export const fetchProduct = async (productSlug: string) => {
-  const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/products/${productSlug}`);
-  const data = (await response.json()) as ProductDTO;
+  const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/product/${productSlug}`);
+  const data = (await response.json()) as ProductDetailsDTO;
 
   return data;
 };

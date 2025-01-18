@@ -54,7 +54,7 @@ export default async function Index(props: IIndexProps) {
       <div className="container mx-auto px-4 py-6">
         <Breadcrumbs />
         <div className="mt-8">
-          <ProductTabs />
+          <ProductTabs data={product} />
         </div>
         <ProductGallery />
         <KeyFeatures />
