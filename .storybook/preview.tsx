@@ -7,13 +7,13 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
-import { handlers } from '@/app/[locale]/msw-provider';
 import { QueryProvider } from '@/components/query-providers';
 import messages from '@/locales/en.json';
+import { mockHandlers } from '@/services/api/mockHandlers';
 
 // Initialize MSW
 initialize({}, [
-  ...handlers,
+  ...mockHandlers,
 ]);
 
 const preview: Preview = {
