@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Pages/HomePage',
+  title: 'Pages/ProductPage',
   component: () => null,
   argTypes: {
   },
@@ -9,10 +9,9 @@ const meta = {
     docs: {
       description: {
         component:
-        'Homepage is the main page of the website. It include these components:<br/>'
-        + '- [HeroBanner](?path=/docs/blocks-herobanner--docs)<br/>'
-        + '- [TrustBlock](?path=/docs/blocks-trustblock--docs)<br/>'
-        + '- [GenderBlock](?path=/docs/blocks-genderblock--docs)<br/>'
+        'Product page show details about single product. It include these components:<br/>'
+        + '- [ProductBanner](?path=/docs/blocks-productbanner--docs)<br/>'
+        + '- [Breadcrumbs](?path=/docs/blocks-breadcrumbs--docs)<br/>'
         + '- [ProductCollections](?path=/docs/blocks-productcollections--docs)<br/>'
         + '- [NewArrivals](?path=/docs/blocks-newarrivals--docs)<br/>'
         + '- [SolarBlock](?path=/docs/blocks-solarblock--docs)<br/>'
@@ -25,6 +24,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const HomePageDefault = {
+export const ProductPageDefault = {
   args: {},
 } satisfies Story;
