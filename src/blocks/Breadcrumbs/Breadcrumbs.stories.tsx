@@ -6,6 +6,10 @@ const meta = {
   title: 'Blocks/Breadcrumbs',
   component: Breadcrumbs,
   argTypes: {
+    links: {
+      type: 'string',
+      control: { type: 'object' },
+    },
   },
   parameters: {
     docs: {
@@ -20,5 +24,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BreadcrumbsDefault = {
-  args: {},
+  args: {
+    links: [
+      { href: '#', label: 'Home' },
+      { href: '#', label: 'Product' },
+    ],
+  },
 } satisfies Story;

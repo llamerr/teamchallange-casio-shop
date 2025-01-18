@@ -52,7 +52,12 @@ export default async function Index(props: IIndexProps) {
     <>
       <HeroProduct image={product.image} />
       <div className="container mx-auto px-4 py-6">
-        <Breadcrumbs />
+        <Breadcrumbs links={[
+          { href: '/collections/', label: 'Collections' },
+          { href: `/collections/${product.collectionSlug}`, label: product.collection },
+          { href: `/product/${product.slug}`, label: product.title },
+        ]}
+        />
         <div className="mt-8">
           <ProductTabs data={product} />
         </div>
