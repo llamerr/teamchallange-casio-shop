@@ -5,6 +5,7 @@ import type { Preview } from '@storybook/react';
 import { themes } from '@storybook/theming';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 import { NextIntlClientProvider } from 'next-intl';
+import { MemoryRouterProvider } from 'next-router-mock/dist/MemoryRouterProvider/next-13.5';
 import React from 'react';
 
 import { QueryProvider } from '@/components/query-providers';
@@ -52,11 +53,13 @@ const preview: Preview = {
 
   decorators: [
     Story => (
-      <NextIntlClientProvider locale="en" messages={messages}>
-        <QueryProvider>
-          <Story />
-        </QueryProvider>
-      </NextIntlClientProvider>
+      <MemoryRouterProvider url="/initial">
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <QueryProvider>
+            <Story />
+          </QueryProvider>
+        </NextIntlClientProvider>
+      </MemoryRouterProvider>
     ),
   ],
 
