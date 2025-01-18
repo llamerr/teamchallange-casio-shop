@@ -10,7 +10,7 @@ type HeroProductProps = {
 
 export function HeroProduct({ image, title }: HeroProductProps) {
   return (
-    <section className="relative flex aspect-[2.13/1] w-full items-center overflow-hidden">
+    <section className="relative flex aspect-[3.84/1] w-full items-center overflow-hidden">
       {image && (
         <Image
           src={image}
