@@ -7,6 +7,7 @@ import { KeyFeatures } from '@/blocks/KeyFeatures/KeyFeatures';
 import { ProductGallery } from '@/blocks/ProductGallery/ProductGallery';
 import { ProductTabs } from '@/blocks/ProductTabs/ProductTabs';
 import { SimilarProducts } from '@/blocks/SimilarProducts/SimilarProducts';
+import { fetchKeyFeatures } from '@/services/api/dto/KeyFeature.query';
 import { fetchProduct } from '@/services/api/dto/Product.query';
 
 type IIndexProps = {
@@ -40,6 +41,11 @@ export default async function Index(props: IIndexProps) {
     queryFn: () => fetchProduct(slug),
   });
 
+  const features = await queryClient.fetchQuery({
+    queryKey: ['features'],
+    queryFn: () => fetchKeyFeatures(),
+  });
+
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-6">
@@ -62,7 +68,7 @@ export default async function Index(props: IIndexProps) {
           <ProductTabs data={product} />
         </div>
         {product.images.length > 0 && <ProductGallery images={product.images} />}
-        <KeyFeatures />
+        <KeyFeatures features={features} />
         <SimilarProducts />
       </div>
     </>
