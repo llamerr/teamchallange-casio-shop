@@ -1,3 +1,20 @@
+# [1.2.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.1.0...v1.2.0) (2025-01-19)
+
+
+### Bug Fixes
+
+* add missing ssr mock part, fix theme that started working and broke bg color after ssr fix ([323abc0](https://github.com/llamerr/teamchallange-casio-shop/commit/323abc00fa5dd169db92ee596ae36ffa59f9ccf7))
+* update aspect ratio for hero product ([34714cc](https://github.com/llamerr/teamchallange-casio-shop/commit/34714cc7a50ce757469667ad8d4b8c4f6e8040bc))
+
+
+### Features
+
+* add key features card and block ([c109dd8](https://github.com/llamerr/teamchallange-casio-shop/commit/c109dd8db2fe2d82d8c647829d414097d31b5c01))
+* add links to breadcrumbs ([cb542df](https://github.com/llamerr/teamchallange-casio-shop/commit/cb542df4a03b3d9ed28e989081dd491b20603145))
+* add preload for gallery images ([5114b03](https://github.com/llamerr/teamchallange-casio-shop/commit/5114b033789f732f7f022565eea3a839e813b2fa))
+* add product gallery ([ae01f2e](https://github.com/llamerr/teamchallange-casio-shop/commit/ae01f2e53c6529c7a2c38bfd56e139cf0326d387))
+* add product tabs block ([c379646](https://github.com/llamerr/teamchallange-casio-shop/commit/c379646a2811072d04fae29791a7abed770ecb4a))
+
 # [1.1.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.0.0...v1.1.0) (2025-01-12)
 
 
