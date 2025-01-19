@@ -14,6 +14,10 @@ export type ProductDTO = {
 
 export type ProductDetailsDTO = ProductDTO & {
   imagePromo: string;
+  images: Array<{
+    src: string;
+    alt: string;
+  }>;
   basicInformation: {
     sections: Array<{
       title: string;

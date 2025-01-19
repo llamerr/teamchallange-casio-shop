@@ -3,6 +3,8 @@ import { http, HttpResponse } from 'msw';
 import { Env } from '@/libs/Env';
 import type { ProductDetailsDTO, ProductDTO } from '@/services/api/dto/Product.dto';
 
+import { LANDSCAPE_IMAGES, PORTRAIT_IMAGES } from '../uploadThingFiles';
+
 export const products: ProductDTO[] = [
   {
     badges: ['Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant'],
@@ -19,7 +21,7 @@ export const products: ProductDTO[] = [
   },
   {
     badges: ['Bestsellers', 'New', 'Water Resistant'],
-    image: 'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYGkWs1dI08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[0],
     title: 'Casio G-Shock GB5600',
     collection: 'ATOMIC TIMEKEEPING',
     collectionSlug: 'atomic-timekeeping',
@@ -32,7 +34,7 @@ export const products: ProductDTO[] = [
   },
   {
     badges: ['Touch Solar', 'Water Resistant', 'Limited', 'Bluetooth'],
-    image: 'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYeUSprUVwfRYkBsbaEu4no9jiThQlW2rM1xK0',
+    image: PORTRAIT_IMAGES[1],
     title: 'Casio G-Shock GB5600',
     collection: 'ATOMIC TIMEKEEPING',
     collectionSlug: 'atomic-timekeeping',
@@ -45,7 +47,7 @@ export const products: ProductDTO[] = [
   },
   {
     badges: [],
-    image: 'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYr2bvTWasc69rf2RoHl3GiBVvn0yOIeJgxFdZ',
+    image: PORTRAIT_IMAGES[2],
     title: 'Casio G-Shock GA-100',
     collection: 'SOLAR POWERED',
     collectionSlug: 'solar-powered',
@@ -74,7 +76,7 @@ export const similarProducts: ProductDTO[] = [
   },
   {
     badges: ['Bestsellers', 'New'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYQXqXB8ERPTdmhn5pFKZ0NGAEofaYbw8VCzrU',
+    image: PORTRAIT_IMAGES[3],
     title: 'Casio G-Shock GB5600',
     collection: 'ATOMIC TIMEKEEPING',
     collectionSlug: 'atomic-timekeeping',
@@ -87,7 +89,7 @@ export const similarProducts: ProductDTO[] = [
   },
   {
     badges: ['Touch Solar'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeY7vfEW4R3RYPkQxf4wdIXz20t9irnvEDTl5bH',
+    image: PORTRAIT_IMAGES[4],
     title: 'Casio G-Shock GA-100',
     collection: 'SOLAR POWERED',
     collectionSlug: 'solar-powered',
@@ -100,7 +102,7 @@ export const similarProducts: ProductDTO[] = [
   },
   {
     badges: ['Children', 'Water Resistant', 'Lightweight'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYK04ip5nKnbafmVTZY97tOiHq5x0u8WSsvDNJ',
+    image: PORTRAIT_IMAGES[5],
     title: 'Casio Baby-G BA-110',
     collection: 'SOLAR POWERED',
     collectionSlug: 'solar-powered',
@@ -129,7 +131,7 @@ export const newProducts: ProductDTO[] = [
   },
   {
     badges: ['Bestsellers', 'New'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYuVvZ45OwsazxZgkH7CmI6byMJqi5WTXrdcl1',
+    image: PORTRAIT_IMAGES[6],
     title: 'Casio G-Shock GA-2100',
     collection: 'ATOMIC TIMEKEEPING',
     collectionSlug: 'atomic-timekeeping',
@@ -142,7 +144,7 @@ export const newProducts: ProductDTO[] = [
   },
   {
     badges: ['Touch Solar'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeY7vfEW4R3RYPkQxf4wdIXz20t9irnvEDTl5bH',
+    image: PORTRAIT_IMAGES[7],
     title: 'Casio G-Shock GB-5600',
     collection: 'ATOMIC TIMEKEEPING',
     collectionSlug: 'atomic-timekeeping',
@@ -155,7 +157,7 @@ export const newProducts: ProductDTO[] = [
   },
   {
     badges: [],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[8],
     title: 'Casio Baby-G BA-110',
     collection: 'SOLAR POWERED',
     collectionSlug: 'solar-powered',
@@ -172,7 +174,8 @@ export const detailedProducts: ProductDetailsDTO[] = [
   {
     badges: ['Limited', 'Bluetooth'],
     image: '',
-    imagePromo: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    imagePromo: LANDSCAPE_IMAGES[0],
+    images: [],
     title: 'Casio G-Shock GA-100',
     collection: 'ATOMIC TIMEKEEPING',
     collectionSlug: 'atomic-timekeeping',
@@ -249,8 +252,22 @@ export const detailedProducts: ProductDetailsDTO[] = [
   },
   {
     badges: ['Bestsellers', 'Water Resistant'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
-    imagePromo: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[9],
+    images: [
+      {
+        src: PORTRAIT_IMAGES[12],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[11],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[10],
+        alt: 'Image 1',
+      },
+    ],
+    imagePromo: LANDSCAPE_IMAGES[1],
     title: 'Casio Edifice EFR-556',
     collection: 'PROFESSIONAL',
     collectionSlug: 'professional',
@@ -324,8 +341,46 @@ export const detailedProducts: ProductDetailsDTO[] = [
   },
   {
     badges: ['Solar Powered', 'Bluetooth'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
-    imagePromo: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[10],
+    imagePromo: LANDSCAPE_IMAGES[0],
+    images: [
+      {
+        src: PORTRAIT_IMAGES[11],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[7],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[0],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[5],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[3],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[8],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[2],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[12],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[4],
+        alt: 'Image 1',
+      },
+    ],
     title: 'Casio Pro Trek PRG-600',
     collection: 'OUTDOOR',
     collectionSlug: 'outdoor',
@@ -401,8 +456,18 @@ export const detailedProducts: ProductDetailsDTO[] = [
   },
   {
     badges: ['Luxury', 'Limited Edition'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
-    imagePromo: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[11],
+    imagePromo: LANDSCAPE_IMAGES[1],
+    images: [
+      {
+        src: PORTRAIT_IMAGES[8],
+        alt: 'Image 1',
+      },
+      {
+        src: PORTRAIT_IMAGES[0],
+        alt: 'Image 1',
+      },
+    ],
     title: 'Casio Oceanus OCW-T200S',
     collection: 'PREMIUM',
     collectionSlug: 'premium',
@@ -479,8 +544,14 @@ export const detailedProducts: ProductDetailsDTO[] = [
   {
     id: 'JY8146-54F',
     slug: 'casio-g-shock-frogman-jy8146-54f',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
-    imagePromo: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[12],
+    imagePromo: LANDSCAPE_IMAGES[0],
+    images: [
+      {
+        src: PORTRAIT_IMAGES[1],
+        alt: 'Image 1',
+      },
+    ],
     title: 'Casio G-Shock Frogman',
     collection: 'ATOMIC TIMEKEEPING',
     collectionSlug: 'atomic-timekeeping',
@@ -559,7 +630,6 @@ export const detailedProducts: ProductDetailsDTO[] = [
       ],
     },
   },
-
 ];
 
 export const productToDetailsMap: Record<string, string> = {

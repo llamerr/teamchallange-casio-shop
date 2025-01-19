@@ -3,6 +3,8 @@ import { http, HttpResponse } from 'msw';
 import { Env } from '@/libs/Env';
 import type { CollectionDTO } from '@/services/api/dto/Collection.dto';
 
+import { PORTRAIT_IMAGES } from '../uploadThingFiles';
+
 export const collections: CollectionDTO[] = [
   {
     id: 'g-shock',
@@ -15,35 +17,35 @@ export const collections: CollectionDTO[] = [
     title: 'Baby-G',
     slug: 'baby-g',
     description: 'Tough, stylish, and colorful',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYXB5bXqL3HZdv4qR56pWGYb2cm1PK97XrnFCf',
+    image: PORTRAIT_IMAGES[10],
   },
   {
     id: 'edifice',
     title: 'Edifice',
     slug: 'edifice',
     description: 'Speed and intelligence',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYq10Eyes0V3tDQwrj1qEnh2xYWlBf4gS8beI7',
+    image: PORTRAIT_IMAGES[9],
   },
   {
     id: 'pro-trek',
     title: 'Pro Trek',
     slug: 'pro-trek',
     description: 'Toughness for the great outdoors',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYLeemj82Z2icjoHEyCG1QBAhxVKMsuUfS9w4J',
+    image: PORTRAIT_IMAGES[8],
   },
   {
     id: 'oceanus',
     title: 'Oceanus',
     slug: 'oceanus',
     description: 'High-precision timepieces',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYr2bvTWasc69rf2RoHl3GiBVvn0yOIeJgxFdZ',
+    image: PORTRAIT_IMAGES[7],
   },
   {
     id: 'sheen',
     title: 'Sheen',
     slug: 'sheen',
     description: 'Elegance and sophistication',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYrFDyoeasc69rf2RoHl3GiBVvn0yOIeJgxFdZ',
+    image: PORTRAIT_IMAGES[6],
   },
 ];
 

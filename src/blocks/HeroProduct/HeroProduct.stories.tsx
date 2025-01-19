@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
+
 import { HeroProduct } from './HeroProduct';
 
 const meta = {
@@ -29,7 +31,7 @@ type Story = StoryObj<typeof meta>;
 
 export const HeroProductDefault = {
   args: {
-    image: 'https://utfs.io/f/oM0zaDGq1OeYuVvZ45OwsazxZgkH7CmI6byMJqi5WTXrdcl1',
+    image: PORTRAIT_IMAGES[0],
     title: 'Casio G-Shock GA-100',
   },
 } satisfies Story;

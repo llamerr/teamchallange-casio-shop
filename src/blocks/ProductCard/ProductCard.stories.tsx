@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
+
 import { ProductCard } from './ProductCard';
 
 const meta = {
@@ -57,7 +59,7 @@ export const ProductCardLight = {
   args: {
     variant: 'light',
     badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[0],
     title: 'Casio Baby-G BA-110',
     slug: 'casio-baby-g-ba-110',
     collection: 'SOLAR POWERED',
@@ -73,7 +75,7 @@ export const ProductCardDark = {
   args: {
     variant: 'dark',
     badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGWNaQ8I08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[1],
     title: 'Casio Baby-G BA-110',
     slug: 'casio-baby-g-ba-110',
     collection: 'SOLAR POWERED',

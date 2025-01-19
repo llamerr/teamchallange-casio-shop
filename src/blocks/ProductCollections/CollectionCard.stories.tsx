@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
+
 import { CollectionCard } from './CollectionCard';
 
 const meta = {
@@ -41,7 +43,7 @@ export const CollectionCardWithImage = {
     slug: 'g-shock',
     description: 'Toughness meets bold style',
     href: '/collections/g-shock',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGkWs1dI08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[0],
   },
 } satisfies Story;
 
@@ -61,6 +63,6 @@ export const CollectionCardLongTitleAndDescription = {
     description:
       'Toughness meets bold style. The G-Shock collection is for those who refuse to back down from a challenge. With its rugged design and advanced technology, it is the perfect timepiece for those who push themselves to the limit.',
     href: '/collections/g-shock',
-    image: 'https://utfs.io/f/oM0zaDGq1OeYGkWs1dI08fdOtvRu97WAj52QYbrI6VEZSXek',
+    image: PORTRAIT_IMAGES[1],
   },
 } satisfies Story;
