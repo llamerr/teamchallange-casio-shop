@@ -10,12 +10,12 @@ const meta = {
       description: {
         component:
         'Product page show details about single product. It include these components:<br/>'
-        + '- [ProductBanner](?path=/docs/blocks-productbanner--docs)<br/>'
+        + '- [HeroProduct](?path=/docs/blocks-heroproduct--docs)<br/>'
         + '- [Breadcrumbs](?path=/docs/blocks-breadcrumbs--docs)<br/>'
-        + '- [ProductCollections](?path=/docs/blocks-productcollections--docs)<br/>'
-        + '- [NewArrivals](?path=/docs/blocks-newarrivals--docs)<br/>'
-        + '- [SolarBlock](?path=/docs/blocks-solarblock--docs)<br/>'
-        + '- [NewsBlock](?path=/docs/blocks-newsblock--docs)',
+        + '- [ProductTabs](?path=/docs/blocks-producttabs--docs)<br/>'
+        + '- [ProductGallery](?path=/docs/blocks-productgallery--docs)<br/>'
+        + '- [KeyFeatures](?path=/docs/blocks-keyfeatures--docs)<br/>'
+        + '- [SimilarProducts](?path=/docs/blocks-similarproducts--docs)',
       },
     },
   },

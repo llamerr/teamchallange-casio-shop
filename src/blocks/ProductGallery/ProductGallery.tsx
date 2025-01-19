@@ -10,7 +10,7 @@ import { Section } from '@/components/Section/Section';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
-type GalleryImage = {
+export type GalleryImage = {
   src: string;
   alt: string;
 };
