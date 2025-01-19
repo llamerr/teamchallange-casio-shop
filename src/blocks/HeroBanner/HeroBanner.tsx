@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
+import { VIDEOS } from '@/services/api/uploadThingFiles';
 
 export function HeroBanner() {
   const { videoRef, togglePlay, isPlaying } = useVideoPlayer();
@@ -18,7 +19,7 @@ export function HeroBanner() {
         loop
         className="absolute inset-0 size-full object-cover"
       >
-        <source src="https://utfs.io/f/oM0zaDGq1OeYuzVjJqkOwsazxZgkH7CmI6byMJqi5WTXrdcl" type="video/mp4" />
+        <source src={VIDEOS[0]} type="video/mp4" />
       </video>
 
       {/* Dark Overlay */}

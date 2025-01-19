@@ -1,6 +1,5 @@
 import { setupServer } from 'msw/node';
 
-import { collectionsHandlers } from '@/services/api/dto/Collection.mock';
-import { productHandlers } from '@/services/api/dto/Product.mock';
+import { mockHandlers } from '@/services/api/mockHandlers';
 
-export const server = setupServer(...productHandlers, ...collectionsHandlers);
+export const server = setupServer(...mockHandlers);

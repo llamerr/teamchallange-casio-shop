@@ -16,7 +16,13 @@ import { MSWProvider } from './msw-provider';
 
 if (process.env.NEXT_RUNTIME === 'nodejs') {
   import('@/mocks/node').then(async ({ server }) => {
-    server.listen();
+    server.listen({
+      onUnhandledRequest(request, print) {
+        if (Env.NEXT_PUBLIC_API_URL && request.url.startsWith(Env.NEXT_PUBLIC_API_URL)) {
+          print.warning();
+        }
+      },
+    });
   });
 }
 

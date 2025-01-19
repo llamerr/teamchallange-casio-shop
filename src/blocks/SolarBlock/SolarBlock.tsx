@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 import { cn } from '@/lib/utils';
 import { useProducts } from '@/services/api/dto/Product.query';
+import { VIDEOS } from '@/services/api/uploadThingFiles';
 
 type SolarBlockProps = {
   className?: string;
@@ -37,16 +38,9 @@ export function SolarBlock({ className }: SolarBlockProps) {
           ))}
           {data && data.map(product => (
             <ProductCard
+              key={product.id}
               variant="dark"
-              key={product.productId}
-              badges={product.badges}
-              image={product.image}
-              title={product.title}
-              collection={product.collection}
-              size={product.size}
-              colors={product.colors}
-              price={product.price}
-              originalPrice={product.originalPrice}
+              {...product}
             />
           ))}
         </div>
@@ -60,7 +54,7 @@ export function SolarBlock({ className }: SolarBlockProps) {
           loop
           className="absolute inset-0 size-full object-cover"
         >
-          <source src="https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYS3D3VS72g8PDJxedV9OtiFHvB3soClSIaY40" type="video/mp4" />
+          <source src={VIDEOS[1]} type="video/mp4" />
         </video>
         <Button
           variant="outline"

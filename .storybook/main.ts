@@ -16,7 +16,9 @@ const config: StorybookConfig = {
 
   framework: {
     name: '@storybook/nextjs',
-    options: {},
+    options: {
+      builder: { useSWC: true },
+    },
   },
 
   staticDirs: ['../public'],
@@ -33,6 +35,17 @@ const config: StorybookConfig = {
 
   typescript: {
     reactDocgen: 'react-docgen-typescript',
+  },
+
+  webpackFinal: async (config) => {
+    if (config.resolve === undefined) {
+      config.resolve = {};
+    };
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'next/router': 'next-router-mock',
+    };
+    return config;
   },
 };
 

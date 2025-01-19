@@ -1,112 +1,183 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+'use client';
 
-export function ProductTabs() {
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import useHashParam from '@/hooks/useHashParam';
+import { cn } from '@/lib/utils';
+import type { ProductDetailsDTO } from '@/services/api/dto/Product.dto';
+
+const tabsData = [
+  {
+    id: 'basic-information',
+    label: 'Basic Information',
+  },
+  {
+    id: 'specifications',
+    label: 'Specifications',
+  },
+  {
+    id: 'delivery',
+    label: 'Delivery & Returns',
+  },
+  {
+    id: 'manual',
+    label: 'Instruction Manual',
+  },
+];
+
+type SpecSectionProps = {
+  title?: string;
+  description?: string;
+  children?: React.ReactNode;
+  direction?: 'row' | 'column';
+};
+
+export function SpecSection({ title, description, children, direction }: SpecSectionProps) {
   return (
-    <Tabs defaultValue="basic-information" className="w-full">
-      <TabsList className="h-auto w-full justify-start rounded-none border-b bg-transparent p-0">
-        <TabsTrigger
-          value="basic-information"
-          className="rounded-none border-b-2 border-transparent px-6 py-3 data-[state=active]:border-primary data-[state=active]:bg-transparent"
+    <section
+      className={cn(
+        'flex min-w-[250px] lg:max-w-[568px] flex-col px-4 pt-2 pb-1',
+        direction === 'row' ? 'flex-row' : 'flex-col',
+      )}
+    >
+      {title && <h2 className="mb-4 overflow-hidden text-ellipsis font-[400] leading-8 text-[#3F4664]">{title}</h2>}
+      {description && (
+        <p
+          className={cn(
+            'leading-8 font-[500] text-[#111321]',
+            direction === 'row' && 'ml-2',
+          )}
         >
-          Basic Information
-        </TabsTrigger>
-        <TabsTrigger
-          value="specifications"
-          className="rounded-none border-b-2 border-transparent px-6 py-3 data-[state=active]:border-primary data-[state=active]:bg-transparent"
-        >
-          Specifications
-        </TabsTrigger>
-        <TabsTrigger
-          value="delivery"
-          className="rounded-none border-b-2 border-transparent px-6 py-3 data-[state=active]:border-primary data-[state=active]:bg-transparent"
-        >
-          Delivery & Returns
-        </TabsTrigger>
-        <TabsTrigger
-          value="manual"
-          className="rounded-none border-b-2 border-transparent px-6 py-3 data-[state=active]:border-primary data-[state=active]:bg-transparent"
-        >
-          Instruction Manual
-        </TabsTrigger>
+          {description}
+        </p>
+      )}
+      {children}
+    </section>
+  );
+}
+
+type ProductTabsProps = {
+  data: ProductDetailsDTO;
+};
+
+export function ProductTabs({ data }: ProductTabsProps) {
+  const { hashParam } = useHashParam();
+  const [selectedLanguage, setSelectedLanguage] = React.useState('');
+
+  const [activeTab, setActiveTab] = React.useState('basic-information');
+  useEffect(() => {
+    if (hashParam) {
+      setActiveTab(hashParam);
+    }
+  }, [hashParam]);
+
+  if (!data) {
+    return null;
+  }
+
+  return (
+    <Tabs
+      defaultValue="basic-information"
+      value={activeTab}
+      onValueChange={setActiveTab}
+      className="w-full"
+    >
+      <TabsList className="h-auto w-full justify-start">
+        {tabsData.map(tab => (
+          <Link href={`#${tab.id}`} key={tab.id}>
+            <TabsTrigger value={tab.id}>
+              {tab.label}
+            </TabsTrigger>
+          </Link>
+        ))}
       </TabsList>
+
+      {/* Basic Information Tab */}
       <TabsContent value="basic-information" className="pt-8">
-        <div className="space-y-8">
-          <section>
-            <h2 className="mb-4 text-xl font-semibold">Timeless Elegance with Modern Features</h2>
-            <p className="text-slate-600">
-              The Casio Vintage A1000MG-9 combines old-fashioned design with modern functionality.
-              Crafted with a sleek gold-tone stainless steel case and a durable Milanese mesh band,
-              this watch embodies sophisticated style. Its scratch-resistant mineral glass ensures durability,
-              while the ion-plated finish provides long-lasting shine.
-            </p>
-          </section>
-          <section>
-            <h2 className="mb-4 text-xl font-semibold">Why Choose the CASIO Vintage A1000MG-9?</h2>
-            <p className="text-slate-600">
-              Perfect for those who value retro charm with contemporary utility, the A1000MG-9 is a
-              statement piece that fits both casual and formal settings.
-            </p>
-          </section>
+        <div className="flex w-full flex-col gap-6 lg:flex-row">
+          {data.basicInformation.sections.map((section, index) => (
+            <SpecSection key={index} title={section.title} description={section.description} />
+          ))}
         </div>
       </TabsContent>
+
+      {/* Specifications Tab */}
       <TabsContent value="specifications" className="pt-8">
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Technical Specifications</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-2">
-              <h3 className="font-medium">Case</h3>
-              <ul className="space-y-1 text-slate-600">
-                <li>Material: Stainless Steel</li>
-                <li>Dimensions: 39×38×7 mm</li>
-                <li>Water Resistance: 30M</li>
-              </ul>
-            </div>
-            <div className="space-y-2">
-              <h3 className="font-medium">Features</h3>
-              <ul className="space-y-1 text-slate-600">
-                <li>LED Light</li>
-                <li>Daily Alarm</li>
-                <li>Auto Calendar</li>
-              </ul>
-            </div>
-          </div>
+        <div className="flex max-h-full w-full flex-row flex-wrap gap-2 overflow-hidden md:max-h-[675px] md:flex-col lg:max-h-[354px]">
+          {data.specifications.specs.map((spec, index) => (
+            <SpecSection key={index} title={`${spec.label}:`} description={spec.value} direction="row" />
+          ))}
+          <SpecSection title="Features:" direction="row">
+            <ul>
+              {data.specifications.features.map((feature, index) => (
+                <li key={index} className="list-none leading-8 text-slate-600">{feature}</li>
+              ))}
+            </ul>
+          </SpecSection>
         </div>
       </TabsContent>
+
+      {/* Delivery & Returns Tab */}
       <TabsContent value="delivery" className="pt-8">
-        <div className="space-y-6">
-          <section className="space-y-4">
-            <h2 className="text-xl font-semibold">Delivery Information</h2>
-            <ul className="space-y-2 text-slate-600">
-              <li>Free shipping on orders over $50</li>
-              <li>Standard delivery: 3-5 business days</li>
-              <li>Express delivery: 1-2 business days (additional cost)</li>
+        <div className="flex max-h-full w-full flex-row flex-wrap gap-2 overflow-hidden md:max-h-[675px] md:flex-col lg:max-h-[354px] lg:flex-row">
+          <SpecSection title={data.deliveryAndReturns.shipping.title} direction="column">
+            <ul className="mx-4 space-y-2">
+              {data.deliveryAndReturns.shipping.options.map((option, index) => (
+                <li key={index} className="list-disc font-[500] text-[#111321]">{option}</li>
+              ))}
             </ul>
-          </section>
-          <section className="space-y-4">
-            <h2 className="text-xl font-semibold">Returns Policy</h2>
-            <ul className="space-y-2 text-slate-600">
-              <li>30-day return window</li>
-              <li>Free returns with original packaging</li>
-              <li>Full refund or exchange available</li>
+          </SpecSection>
+          <SpecSection title={data.deliveryAndReturns.payment.title} direction="column">
+            <ul className="mx-4 space-y-2">
+              {data.deliveryAndReturns.payment.options.map((option, index) => (
+                <li key={index} className="list-disc font-[500] text-[#111321]">{option}</li>
+              ))}
             </ul>
-          </section>
+          </SpecSection>
+          <SpecSection title={data.deliveryAndReturns.returns.title} direction="column" description={data.deliveryAndReturns.returns.description} />
         </div>
       </TabsContent>
+
+      {/* Manual Tab */}
       <TabsContent value="manual" className="pt-8">
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Product Manual</h2>
-          <p className="text-slate-600">
-            Download the complete instruction manual for your Casio Vintage A1000MG-9 watch.
-            The manual includes detailed instructions for all features and functions.
-          </p>
-          <button className="inline-flex items-center gap-2 text-primary hover:text-primary/80">
-            Download PDF Manual
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-          </button>
+        <div className="flex max-h-full w-full flex-row flex-wrap gap-2 overflow-hidden md:max-h-[675px] md:flex-col lg:max-h-[354px] lg:flex-row">
+          <SpecSection description={data.manual.description} />
+          <SpecSection>
+            <p className="font-[500] leading-8 text-[#111321]">
+              Select your preferred language. Click "Download" to save the manual to your device.
+            </p>
+            <div className="flex flex-col sm:flex-row">
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                <SelectTrigger className="w-[380px]">
+                  <SelectValue placeholder="Choose the manual's language" />
+                </SelectTrigger>
+                <SelectContent>
+                  {data.manual.list.map((manual, index) => (
+                    <SelectItem key={index} value={manual.language}>
+                      {manual.language}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button
+                disabled={!selectedLanguage}
+                onClick={() => window.open(data.manual.list.find(manual => manual.language === selectedLanguage)?.url, '_blank')}
+                className="bg-[#111321] text-[#F3F3F3]"
+              >
+                Download (PDF)
+              </Button>
+            </div>
+          </SpecSection>
         </div>
       </TabsContent>
     </Tabs>

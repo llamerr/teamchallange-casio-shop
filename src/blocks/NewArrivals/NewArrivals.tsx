@@ -23,15 +23,8 @@ export function NewArrivals({ className }: NewArrivalsProps) {
         ))}
         {data && data.map(product => (
           <ProductCard
-            key={product.productId}
-            badges={product.badges}
-            image={product.image}
-            title={product.title}
-            collection={product.collection}
-            size={product.size}
-            colors={product.colors}
-            price={product.price}
-            originalPrice={product.originalPrice}
+            key={product.id}
+            {...product}
           />
         ))}
       </div>

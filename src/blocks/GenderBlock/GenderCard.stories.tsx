@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
+
 import { GenderCard } from './GenderCard';
 
 const meta = {
@@ -25,7 +27,7 @@ export const GenderCardDefault = {
     description: 'Hurry, offers end soon!',
     buttonText: 'Shop Now',
     buttonLink: '/collections/womens-watches',
-    image: 'https://utfs.io/f/oM0zaDGq1OeY7vfEW4R3RYPkQxf4wdIXz20t9irnvEDTl5bH',
+    image: PORTRAIT_IMAGES[1],
   },
   parameters: {
     docs: {

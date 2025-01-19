@@ -2,24 +2,20 @@
 
 import { Suspense, use } from 'react';
 
-import { collectionsHandlers } from '@/services/api/dto/Collection.mock';
-import { newsHandlers } from '@/services/api/dto/News.mock';
-import { productHandlers } from '@/services/api/dto/Product.mock';
-
-export const handlers = [...productHandlers, ...collectionsHandlers, ...newsHandlers];
+import { Env } from '@/libs/Env';
+import { mockHandlers } from '@/services/api/mockHandlers';
 
 const mockingEnabledPromise
   = typeof window !== 'undefined'
     ? import('@/mocks/browser').then(async ({ worker }) => {
       await worker.start({
         onUnhandledRequest(request, print) {
-          if (request.url.includes('_next')) {
-            return;
+          if (Env.NEXT_PUBLIC_API_URL && request.url.startsWith(Env.NEXT_PUBLIC_API_URL)) {
+            print.warning();
           }
-          print.warning();
         },
       });
-      worker.use(...handlers);
+      worker.use(...mockHandlers);
 
       // eslint-disable-next-line no-console
       console.log(worker.listHandlers());
