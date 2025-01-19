@@ -1,8 +1,10 @@
 'use client';
 
 import { ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react';
-import Image from 'next/image';
+import type { ImgProps } from 'next/dist/shared/lib/get-img-props';
+import Image, { getImageProps } from 'next/image';
 import * as React from 'react';
+import { useWindowSize } from 'react-use';
 
 import { Section } from '@/components/Section/Section';
 import { Button } from '@/components/ui/button';
@@ -20,11 +22,47 @@ type ProductGalleryProps = {
 export function ProductGallery({ images }: ProductGalleryProps) {
   const [showDialog, setShowDialog] = React.useState(false);
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const [nextImage, setNextImage] = React.useState<ImgProps | null>(null);
+  const [prevImage, setPrevImage] = React.useState<ImgProps | null>(null);
+  const { width, height } = useWindowSize();
 
   // Fallback to placeholder if no images provided
-  const displayImages = images.length > 0
-    ? images
-    : [{ src: '', alt: 'Gallery image 1' }];
+  const displayImages = React.useMemo(() =>
+    images.length > 0
+      ? images
+      : [{ src: '', alt: 'Gallery image 1' }], [images]);
+
+  // Preload next and previous images
+  const preloadImages = React.useCallback(() => {
+    if (displayImages.length > 1) {
+      const preloadNext = (currentImageIndex + 1) % displayImages.length;
+      const preloadPrev = (currentImageIndex - 1 + displayImages.length) % displayImages.length;
+
+      const { props: nextProps } = getImageProps({
+        src: displayImages[preloadNext]?.src || '',
+        alt: displayImages[preloadNext]?.alt || '',
+        width,
+        height,
+      });
+
+      const { props: prevProps } = getImageProps({
+        src: displayImages[preloadPrev]?.src || '',
+        alt: displayImages[preloadPrev]?.alt || '',
+        width,
+        height,
+      });
+
+      setNextImage(nextProps);
+      setPrevImage(prevProps);
+    }
+  }, [currentImageIndex, displayImages, height, width]);
+
+  // Call preload when dialog opens or image changes
+  React.useEffect(() => {
+    if (showDialog) {
+      preloadImages();
+    }
+  }, [showDialog, currentImageIndex, preloadImages]);
 
   const handlePrevious = () => {
     setCurrentImageIndex(prev =>
@@ -209,8 +247,19 @@ export function ProductGallery({ images }: ProductGalleryProps) {
                     sizes="100vw"
                     className="object-contain"
                     priority
+                    loading="eager"
                   />
                 )}
+                <link
+                  rel="preload"
+                  as="image"
+                  href={nextImage?.src}
+                />
+                <link
+                  rel="preload"
+                  as="image"
+                  href={prevImage?.src}
+                />
                 {!displayImages[currentImageIndex]?.src && <ImageIcon className="size-8" />}
               </div>
 
