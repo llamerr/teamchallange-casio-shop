@@ -61,7 +61,7 @@ export default async function Index(props: IIndexProps) {
         <div className="mt-8">
           <ProductTabs data={product} />
         </div>
-        <ProductGallery />
+        {product.images.length > 0 && <ProductGallery images={product.images} />}
         <KeyFeatures />
         <SimilarProducts />
       </div>
