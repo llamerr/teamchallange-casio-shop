@@ -13,9 +13,7 @@ export function CollectionList() {
 
   return (
     <div className="my-12 flex flex-row gap-4">
-      {error instanceof Error && (
-        <p>{error.message}</p>
-      )}
+      {error instanceof Error && <p>{error.message}</p>}
       {data && data.map(collection => (
         <SmallCollectionCard
           key={collection.id}

@@ -10,27 +10,13 @@ import { useSimilarProducts } from '@/services/api/dto/Product/Product.query';
 export function SimilarProducts() {
   const { data, error, isLoading } = useSimilarProducts();
 
-  if (isLoading) {
-    return (
-      <Section title="Similar Watches" link={{ href: '/watches', label: 'View all' }}>
-        {Array.from({ length: 4 }).map((_, i) => (
-          <ProductCardSkeleton key={i} />
-        ))}
-      </Section>
-    );
-  }
-
-  if (error instanceof Error) {
-    return (
-      <Section title="Similar Watches">
-        <p>{error.message}</p>
-      </Section>
-    );
-  }
-
   return (
     <Section title="Similar Watches" link={{ href: '/watches', label: 'View all' }}>
+      {error instanceof Error && <p>{error.message}</p>}
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {isLoading && Array.from({ length: 4 }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
         {data && data.map(product => (
           <ProductCard
             key={product.id}

@@ -18,9 +18,7 @@ export function ProductCollections({ className }: ProductCollectionsProps) {
   return (
     <Section title="Collections" className={className}>
       <div className="grid grid-cols-2 grid-rows-2 gap-4 lg:grid-cols-3">
-        {error instanceof Error && (
-          <p>{error.message}</p>
-        )}
+        {error instanceof Error && <p>{error.message}</p>}
         {isLoading && Array.from({ length: 3 }).map((_, i) => (
           <CollectionCardSkeleton key={i} />
         ))}
