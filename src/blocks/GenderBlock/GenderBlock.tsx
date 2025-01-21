@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import { PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
 
 import { GenderCard } from './GenderCard';
