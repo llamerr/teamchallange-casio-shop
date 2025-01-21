@@ -4,4 +4,5 @@ export type CollectionDTO = {
   slug: string;
   description: string;
   image?: string;
+  imageWide?: string;
 };

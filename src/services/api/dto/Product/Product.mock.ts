@@ -1,9 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
 import { Env } from '@/libs/Env';
-import type { ProductDetailsDTO, ProductDTO } from '@/services/api/dto/Product.dto';
-
-import { LANDSCAPE_IMAGES, PORTRAIT_IMAGES } from '../uploadThingFiles';
+import type { ProductDetailsDTO, ProductDTO } from '@/services/api/dto/Product/Product.dto';
+import { LANDSCAPE_IMAGES, PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
 
 export const products: ProductDTO[] = [
   {

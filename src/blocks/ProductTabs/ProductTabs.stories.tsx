@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import type { ProductDetailsDTO } from '@/services/api/dto/Product.dto';
-import { detailedProducts } from '@/services/api/dto/Product.mock';
+import type { ProductDetailsDTO } from '@/services/api/dto/Product/Product.dto';
+import { detailedProducts } from '@/services/api/dto/Product/Product.mock';
 
 import { ProductTabs } from './ProductTabs';
 

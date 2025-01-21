@@ -1,5 +1,5 @@
 import { Section } from '@/components/Section/Section';
-import type { KeyFeatureDTO } from '@/services/api/dto/KeyFeature.dto';
+import type { KeyFeatureDTO } from '@/services/api/dto/KeyFeature/KeyFeature.dto';
 
 import { KeyFeaturesCard } from './KeyFeaturesCard';
 

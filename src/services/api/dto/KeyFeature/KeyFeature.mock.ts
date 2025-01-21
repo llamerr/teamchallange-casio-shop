@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 import { Env } from '@/libs/Env';
 
-import { PORTRAIT_IMAGES } from '../uploadThingFiles';
+import { PORTRAIT_IMAGES } from '../../uploadThingFiles';
 import type { KeyFeatureDTO } from './KeyFeature.dto';
 
 export const KeyFeatures: KeyFeatureDTO[] = [

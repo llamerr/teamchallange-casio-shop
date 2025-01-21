@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import type { ProductDTO } from '@/services/api/dto/Product.dto';
+import type { ProductDTO } from '@/services/api/dto/Product/Product.dto';
 
 type ProductCardProps = Omit<ProductDTO, 'id'> & {
   variant?: 'light' | 'dark';

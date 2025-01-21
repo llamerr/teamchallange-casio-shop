@@ -2,7 +2,7 @@ import { ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { KeyFeatureDTO } from '@/services/api/dto/KeyFeature.dto';
+import type { KeyFeatureDTO } from '@/services/api/dto/KeyFeature/KeyFeature.dto';
 
 type KeyFeaturesCardProps = Omit<KeyFeatureDTO, 'id'> & {
 };

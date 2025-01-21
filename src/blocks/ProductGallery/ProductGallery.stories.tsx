@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { detailedProducts } from '@/services/api/dto/Product.mock';
+import { detailedProducts } from '@/services/api/dto/Product/Product.mock';
 
 import { type GalleryImage, ProductGallery } from './ProductGallery';
 

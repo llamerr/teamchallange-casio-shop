@@ -5,7 +5,7 @@ import React from 'react';
 import { ProductCard } from '@/blocks/ProductCard/ProductCard';
 import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
 import { Section } from '@/components/Section/Section';
-import { useSimilarProducts } from '@/services/api/dto/Product.query';
+import { useSimilarProducts } from '@/services/api/dto/Product/Product.query';
 
 export function SimilarProducts() {
   const { data, error, isLoading } = useSimilarProducts();

@@ -5,7 +5,7 @@ import React from 'react';
 import { ProductCard } from '@/blocks/ProductCard/ProductCard';
 import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
 import { Section } from '@/components/Section/Section';
-import { useNewProducts } from '@/services/api/dto/Product.query';
+import { useNewProducts } from '@/services/api/dto/Product/Product.query';
 
 type NewArrivalsProps = {
   className?: string;

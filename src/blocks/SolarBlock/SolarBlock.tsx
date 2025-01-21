@@ -9,7 +9,7 @@ import { Section } from '@/components/Section/Section';
 import { Button } from '@/components/ui/button';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 import { cn } from '@/lib/utils';
-import { useProducts } from '@/services/api/dto/Product.query';
+import { useProducts } from '@/services/api/dto/Product/Product.query';
 import { VIDEOS } from '@/services/api/uploadThingFiles';
 
 type SolarBlockProps = {

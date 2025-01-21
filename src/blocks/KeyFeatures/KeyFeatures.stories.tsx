@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { KeyFeatures as features } from '@/services/api/dto/KeyFeature.mock';
+import { KeyFeatures as features } from '@/services/api/dto/KeyFeature/KeyFeature.mock';
 
 import { KeyFeatures } from './KeyFeatures';
 
