@@ -100,3 +100,17 @@ export const ProductCardWithoutImage = {
     originalPrice: 89.00,
   },
 } satisfies Story;
+
+export const ProductCardWithoutOriginalPrice = {
+  args: {
+    badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
+    image: PORTRAIT_IMAGES[1],
+    title: 'Casio Baby-G BA-110',
+    slug: 'casio-baby-g-ba-110',
+    collection: 'SOLAR POWERED',
+    collectionSlug: 'solar-powered',
+    size: '43 mm',
+    colors: 5,
+    price: 69.00,
+  },
+} satisfies Story;

@@ -28,26 +28,16 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
 
   return (
     <Card
-      className={`relative aspect-[0.660/1] rounded-none border border-gray-200 shadow-none transition-colors
-        ${variant === 'dark' ? 'bg-[#1F1F1F]' : 'bg-white'}
-        ${isHovered ? (variant === 'dark' ? 'bg-[#0F0F0F]' : 'bg-gray-100') : ''}
+      className={`relative aspect-[0.660/1] rounded-none border border-[#7983A7] shadow-none transition-colors
+        ${variant === 'dark' ? 'bg-[#111321]' : 'bg-[#F0F0F1]'}
       `}
       ref={ref}
     >
-      <CardContent className="p-4">
-        <div className="mb-4 flex flex-wrap gap-2">
-          {badges.map(badge => (
-            <span
-              key={badge}
-              className={`border- border${variant === 'dark' ? 'gray-700' : 'gray-300'} bg-${variant === 'dark' ? 'gray-800' : 'white'} px-2 py-1 text-xs
-                ${variant === 'dark' ? 'text-white' : 'text-black'}
-              `}
-            >
-              {badge}
-            </span>
-          ))}
-        </div>
-        <div className="relative mb-4 flex aspect-square items-center justify-center bg-muted dark:bg-gray-800">
+      <CardContent className="relative mb-4 aspect-square">
+        <div className={`absolute inset-0 flex items-center justify-center ${
+          isHovered ? 'bg-[#111321] text-[#F0F0F1]' : 'bg-[#F0F0F1] text-[#111321]'
+        }`}
+        >
           {image && (
             <Image
               src={image}
@@ -61,43 +51,61 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
             <ImageIcon className="size-8" />
           )}
         </div>
-        <div className="space-y-2">
-          <h3 className="text-xl font-medium leading-tight">
-            <Link href={`/product/${slug}`}>
-              {title}
-            </Link>
-          </h3>
-          <div className={`text-sm ${variant === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
-            {collection}
-          </div>
-          <div className={`text-sm ${variant === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
-            {size}
-            {' '}
-            |
-            {colors}
-          </div>
+        <div className="absolute mb-4 flex flex-wrap gap-1.5 p-3">
+          {badges.map(badge => (
+            <span
+              key={badge}
+              className="border border-[#7983A7] bg-[#F3F3F3] p-1 text-xs text-[#111321]"
+            >
+              {badge}
+            </span>
+          ))}
         </div>
       </CardContent>
-      <CardFooter className="flex items-center justify-between p-4 pt-0">
-        <div className="flex items-center gap-2">
-          <span className="text-xl font-bold">
-            {price}
-          </span>
-          {originalPrice && <span className={`text-sm ${variant === 'dark' ? 'text-red-400' : 'text-red-500'} line-through`}>{originalPrice}</span>}
+      <CardFooter className="space-y-2 p-3 pt-0">
+        <h3 className={`${variant === 'dark' ? 'text-[#F3F3F3]' : 'text-[#111321]'} font-medium leading-tight`}>
+          <Link href={`/product/${slug}`}>
+            {title}
+          </Link>
+        </h3>
+        <div className={`text-sm ${variant === 'dark' ? 'text-[#B1B7CB]' : 'text-[#7983A7]'}`}>
+          {collection}
         </div>
-        {isHovered && (
-          <div className="flex gap-2">
-            <button className={`border- border${variant === 'dark' ? 'gray-700' : 'gray-300'} bg-${variant === 'dark' ? 'gray-800' : 'white'} px-4 py-2 text-sm
-              ${variant === 'dark' ? 'text-white' : 'text-black'}
+        <div className={`text-sm ${variant === 'dark' ? 'text-[#B1B7CB]' : 'text-[#7983A7]'}`}>
+          {size}
+          {' '}
+          |
+          {colors}
+          {' '}
+          Colors
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-start gap-2">
+            <span className={`text-xl ${variant === 'dark' ? 'text-[#F3F3F3]' : 'text-[#111321]'} font-bold`}>
+              {price}
+            </span>
+            {originalPrice && (
+              <span className="text-sm text-[#B3261E] line-through">
+                {originalPrice}
+              </span>
+            )}
+          </div>
+          <div className={`flex ${isHovered ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
+            <button
+              type="button"
+              className={`border px-4 py-2 text-sm ${
+                variant === 'dark'
+                  ? 'border-[#F3F3F3] bg-[#111321] text-[#F3F3F3]'
+                  : 'border-[#111321] bg-[#F3F3F3] text-[#111321]'}
             `}
             >
               Compare
             </button>
-            <button className={`bg-${variant === 'dark' ? 'white' : 'black'} text- p-2${variant === 'dark' ? 'black' : 'white'}`}>
+            <button type="button" className={`aspect-square ${variant === 'dark' ? 'bg-[#F3F3F3] text-[#111321]' : 'bg-[#111321] text-[#F3F3F3]'} p-2`}>
               <Mail className="size-4" />
             </button>
           </div>
-        )}
+        </div>
       </CardFooter>
     </Card>
   );
