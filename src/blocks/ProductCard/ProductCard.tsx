@@ -1,7 +1,7 @@
 'use client';
 
 import { useHover } from '@uidotdev/usehooks';
-import { ImageIcon, Mail } from 'lucide-react';
+import { ImageIcon, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -62,22 +62,25 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
           ))}
         </div>
       </CardContent>
-      <CardFooter className="space-y-2 p-3 pt-0">
+      <CardFooter className="flex aspect-[1/0.5] flex-col justify-between p-3 pt-0">
         <h3 className={`${variant === 'dark' ? 'text-[#F3F3F3]' : 'text-[#111321]'} font-medium leading-tight`}>
           <Link href={`/product/${slug}`}>
             {title}
           </Link>
         </h3>
-        <div className={`text-sm ${variant === 'dark' ? 'text-[#B1B7CB]' : 'text-[#7983A7]'}`}>
-          {collection}
-        </div>
-        <div className={`text-sm ${variant === 'dark' ? 'text-[#B1B7CB]' : 'text-[#7983A7]'}`}>
-          {size}
-          {' '}
-          |
-          {colors}
-          {' '}
-          Colors
+        <div>
+          <div className={`text-sm ${variant === 'dark' ? 'text-[#B1B7CB]' : 'text-[#7983A7]'}`}>
+            {collection}
+          </div>
+          <div className={`text-sm ${variant === 'dark' ? 'text-[#B1B7CB]' : 'text-[#7983A7]'}`}>
+            {size}
+            {' '}
+            |
+            {' '}
+            {colors}
+            {' '}
+            Colors
+          </div>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-start gap-2">
@@ -101,8 +104,8 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
             >
               Compare
             </button>
-            <button type="button" className={`aspect-square ${variant === 'dark' ? 'bg-[#F3F3F3] text-[#111321]' : 'bg-[#111321] text-[#F3F3F3]'} p-2`}>
-              <Mail className="size-4" />
+            <button type="button" className={`${variant === 'dark' ? 'bg-[#F3F3F3] text-[#111321]' : 'bg-[#111321] text-[#F3F3F3]'} px-[9px] py-1`}>
+              <ShoppingBag className="size-5" />
             </button>
           </div>
         </div>
