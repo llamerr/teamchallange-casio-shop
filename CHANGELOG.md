@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.2.0...v1.3.0) (2025-01-30)
+
+
+### Bug Fixes
+
+* product card visuals ([c0deb6f](https://github.com/llamerr/teamchallange-casio-shop/commit/c0deb6f43cbd48627c383b254d727630abbff34e))
+
+
+### Features
+
+* product card responsive design for large screens ([7f0142f](https://github.com/llamerr/teamchallange-casio-shop/commit/7f0142fee322ef3f50948026961b1d4980a12ce6))
+* update product card ([e36909c](https://github.com/llamerr/teamchallange-casio-shop/commit/e36909c450959fe0b359736be100f7122d4ca526))
+
 # [1.2.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.1.0...v1.2.0) (2025-01-19)
 
 
