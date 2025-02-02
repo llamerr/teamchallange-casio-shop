@@ -1,7 +1,8 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Env } from '@/libs/Env';
-import type { ProductDetailsDTO, ProductDTO } from '@/services/api/dto/Product/Product.dto';
+import type { ProductDetailsDTO, ProductDTO, ProductsListDTO } from '@/services/api/dto/Product/Product.dto';
 import { LANDSCAPE_IMAGES, PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
 
 export const products: ProductDTO[] = [
@@ -9,8 +10,8 @@ export const products: ProductDTO[] = [
     badges: ['Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant'],
     image: '',
     title: 'Casio G-Shock Frogman',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'G-Shock',
+    collectionSlug: 'g-shock',
     size: '40 mm',
     colors: 3,
     price: 95.00,
@@ -22,8 +23,8 @@ export const products: ProductDTO[] = [
     badges: ['Bestsellers', 'New', 'Water Resistant'],
     image: PORTRAIT_IMAGES[0],
     title: 'Casio G-Shock GB5600',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'EDIFICE',
+    collectionSlug: 'edifice',
     size: '40 mm',
     colors: 3,
     price: 95.00,
@@ -35,8 +36,8 @@ export const products: ProductDTO[] = [
     badges: ['Touch Solar', 'Water Resistant', 'Limited', 'Bluetooth'],
     image: PORTRAIT_IMAGES[1],
     title: 'Casio G-Shock GB5600',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'PRO TREK',
+    collectionSlug: 'pro-trek',
     size: '40 mm',
     colors: 3,
     price: 95.00,
@@ -48,8 +49,8 @@ export const products: ProductDTO[] = [
     badges: [],
     image: PORTRAIT_IMAGES[2],
     title: 'Casio G-Shock GA-100',
-    collection: 'SOLAR POWERED',
-    collectionSlug: 'solar-powered',
+    collection: 'Baby-G',
+    collectionSlug: 'baby-g',
     size: '42 mm',
     colors: 5,
     price: 110.00,
@@ -64,8 +65,8 @@ export const similarProducts: ProductDTO[] = [
     badges: ['Limited', 'Bluetooth'],
     image: '',
     title: 'Seiko 5 Sports',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'G-Shock',
+    collectionSlug: 'g-shock',
     size: '40 mm',
     colors: 3,
     price: 95.00,
@@ -77,8 +78,8 @@ export const similarProducts: ProductDTO[] = [
     badges: ['Bestsellers', 'New'],
     image: PORTRAIT_IMAGES[3],
     title: 'Casio G-Shock GB5600',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'EDIFICE',
+    collectionSlug: 'edifice',
     size: '40 mm',
     colors: 3,
     price: 95.00,
@@ -90,8 +91,8 @@ export const similarProducts: ProductDTO[] = [
     badges: ['Touch Solar'],
     image: PORTRAIT_IMAGES[4],
     title: 'Casio G-Shock GA-100',
-    collection: 'SOLAR POWERED',
-    collectionSlug: 'solar-powered',
+    collection: 'PRO TREK',
+    collectionSlug: 'pro-trek',
     size: '42 mm',
     colors: 5,
     price: 110.00,
@@ -103,8 +104,8 @@ export const similarProducts: ProductDTO[] = [
     badges: ['Children', 'Water Resistant', 'Lightweight'],
     image: PORTRAIT_IMAGES[5],
     title: 'Casio Baby-G BA-110',
-    collection: 'SOLAR POWERED',
-    collectionSlug: 'solar-powered',
+    collection: 'Sheen',
+    collectionSlug: 'sheen',
     size: '42 mm',
     colors: 5,
     price: 110.00,
@@ -119,8 +120,8 @@ export const newProducts: ProductDTO[] = [
     badges: ['Limited', 'Bluetooth'],
     image: '',
     title: 'Casio G-Shock GA-100',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'G-Shock',
+    collectionSlug: 'g-shock',
     size: '45 mm',
     colors: 3,
     price: 99.00,
@@ -132,8 +133,8 @@ export const newProducts: ProductDTO[] = [
     badges: ['Bestsellers', 'New'],
     image: PORTRAIT_IMAGES[6],
     title: 'Casio G-Shock GA-2100',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'EDIFICE',
+    collectionSlug: 'edifice',
     size: '45 mm',
     colors: 3,
     price: 99.00,
@@ -145,8 +146,8 @@ export const newProducts: ProductDTO[] = [
     badges: ['Touch Solar'],
     image: PORTRAIT_IMAGES[7],
     title: 'Casio G-Shock GB-5600',
-    collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collection: 'Sheen',
+    collectionSlug: 'sheen',
     size: '43 mm',
     colors: 3,
     price: 99.00,
@@ -158,8 +159,8 @@ export const newProducts: ProductDTO[] = [
     badges: [],
     image: PORTRAIT_IMAGES[8],
     title: 'Casio Baby-G BA-110',
-    collection: 'SOLAR POWERED',
-    collectionSlug: 'solar-powered',
+    collection: 'Oceanus',
+    collectionSlug: 'oceanus',
     size: '43 mm',
     colors: 5,
     price: 69.00,
@@ -169,6 +170,20 @@ export const newProducts: ProductDTO[] = [
   },
 ];
 
+const REPEAT_COUNT = 20;
+function repeatArray<T>(array: T[]): T[] {
+  return Array.from({ length: REPEAT_COUNT })
+    .fill(null)
+    .flatMap(() => array);
+}
+const paginatedProducts: Omit<ProductsListDTO, 'hasNextPage'> = {
+  products: repeatArray([...products, ...similarProducts, ...newProducts]).map(product => ({
+    ...product,
+    id: uuidv4(),
+  })),
+  totalCount: REPEAT_COUNT * (products.length + similarProducts.length + newProducts.length),
+};
+
 export const detailedProducts: ProductDetailsDTO[] = [
   {
     badges: ['Limited', 'Bluetooth'],
@@ -177,7 +192,7 @@ export const detailedProducts: ProductDetailsDTO[] = [
     images: [],
     title: 'Casio G-Shock GA-100',
     collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collectionSlug: 'g-shock',
     size: '45 mm',
     colors: 3,
     price: 99.00,
@@ -553,7 +568,7 @@ export const detailedProducts: ProductDetailsDTO[] = [
     ],
     title: 'Casio G-Shock Frogman',
     collection: 'ATOMIC TIMEKEEPING',
-    collectionSlug: 'atomic-timekeeping',
+    collectionSlug: 'g-shock',
     size: '40 mm',
     colors: 3,
     price: 95.00,
@@ -650,24 +665,61 @@ type GetProductParams = {
   slug: string;
 };
 
+type GetProductsResponse = ProductsListDTO;
+
 export const productHandlers = [
-  http.get<GetProductParams>(`${Env.NEXT_PUBLIC_API_URL}/api/product/:slug`, ({ params }) => {
-    const id = productToDetailsMap[
-      [...products, ...similarProducts, ...newProducts]
-        .find(product => product.slug === params.slug)
-        ?.id as string
-    ];
-    return HttpResponse.json(
-      detailedProducts.find(product => product.id === id),
-    );
+  http.get<GetProductParams>(`${Env.NEXT_PUBLIC_API_URL}/api/product/:slug`, async ({ params }) => {
+    await delay();
+
+    const product = [...products, ...similarProducts, ...newProducts]
+      .find(product => product.slug === params.slug);
+
+    if (!product) {
+      return new HttpResponse('Not found', {
+        status: 404,
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+      });
+    }
+    const productDetailsId = productToDetailsMap[product.id];
+    const detailedProduct = {
+      ...detailedProducts.find(p => p.id === productDetailsId),
+      ...product,
+    };
+    return HttpResponse.json(detailedProduct);
   }),
-  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/products`, () => {
-    return HttpResponse.json(products);
+  http.get<any, any, GetProductsResponse>(`${Env.NEXT_PUBLIC_API_URL}/api/products`, async ({ request }) => {
+    await delay();
+
+    const url = new URL(request.url);
+    const pageNumber = Number.parseInt(url.searchParams.get('page') || '0', 10);
+    const collection = url.searchParams.get('collection');
+
+    const filteredProducts = paginatedProducts.products
+      .filter(product => !collection || product.collectionSlug === collection);
+
+    const hasNextPage = (pageNumber + 1) * 20 < filteredProducts.length;
+
+    const result: GetProductsResponse = {
+      products: filteredProducts.slice(0, 20),
+      totalCount: filteredProducts.length,
+    };
+
+    if (hasNextPage) {
+      result.nextPage = pageNumber + 1;
+    }
+
+    return HttpResponse.json(result);
   }),
-  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/products/similar`, () => {
-    return HttpResponse.json(similarProducts);
+  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/products/similar`, async () => {
+    await delay();
+
+    return HttpResponse.json({ products: similarProducts, totalCount: similarProducts.length });
   }),
-  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/products/new`, () => {
-    return HttpResponse.json(newProducts);
+  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/products/new`, async () => {
+    await delay();
+
+    return HttpResponse.json({ products: newProducts, totalCount: newProducts.length });
   }),
 ];

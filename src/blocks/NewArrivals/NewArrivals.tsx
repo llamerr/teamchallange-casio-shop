@@ -21,7 +21,7 @@ export function NewArrivals({ className }: NewArrivalsProps) {
         {isLoading && Array.from({ length: 4 }).map((_, i) => (
           <ProductCardSkeleton key={i} />
         ))}
-        {data && data.map(product => (
+        {data && data.products.map(product => (
           <ProductCard
             key={product.id}
             {...product}

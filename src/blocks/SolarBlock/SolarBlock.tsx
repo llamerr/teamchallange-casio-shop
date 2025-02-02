@@ -17,7 +17,7 @@ type SolarBlockProps = {
 };
 
 export function SolarBlock({ className }: SolarBlockProps) {
-  const { data, error, isLoading } = useProducts();
+  const { data, error, isLoading } = useProducts({});
 
   const { videoRef, togglePlay, isPlaying } = useVideoPlayer();
 
@@ -36,7 +36,7 @@ export function SolarBlock({ className }: SolarBlockProps) {
           {isLoading && Array.from({ length: 4 }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
-          {data && data.map(product => (
+          {data && data.pages[0]?.products.map(product => (
             <ProductCard
               key={product.id}
               variant="dark"

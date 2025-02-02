@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Env } from '@/libs/Env';
 
-import type { ProductDetailsDTO, ProductDTO } from './Product.dto';
+import type { ProductDetailsDTO, ProductsListDTO } from './Product.dto';
 
 export const fetchProduct = async (productSlug: string) => {
   const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/product/${productSlug}`);
@@ -10,7 +10,6 @@ export const fetchProduct = async (productSlug: string) => {
 
   return data;
 };
-
 export const useProduct = (productSlug: string) => {
   return useQuery({
     queryKey: ['product', productSlug],
@@ -18,22 +17,25 @@ export const useProduct = (productSlug: string) => {
   });
 };
 
-export const fetchProducts = async () => {
-  const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/products`);
-  const data = (await response.json()) as ProductDTO[];
+export const fetchProducts = async ({ pageParam = 0, collection }: { pageParam: number; collection?: string }) => {
+  const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/products?page=${pageParam}&collection=${collection}`);
+  const data = (await response.json()) as ProductsListDTO;
 
   return data;
 };
-export const useProducts = () => {
-  return useQuery({
-    queryKey: ['products'],
-    queryFn: fetchProducts,
+export const useProducts = ({ collection }: { collection?: string }) => {
+  return useInfiniteQuery({
+    queryKey: ['products', collection],
+    queryFn: ({ pageParam, queryKey }) => fetchProducts({ pageParam, collection: queryKey[1] }),
+    initialPageParam: 0,
+    getNextPageParam: lastPage => lastPage.nextPage,
+    placeholderData: keepPreviousData,
   });
 };
 
 export const fetchSimilarProducts = async () => {
   const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/products/similar`);
-  const data = (await response.json()) as ProductDTO[];
+  const data = (await response.json()) as ProductsListDTO;
 
   return data;
 };
@@ -46,7 +48,7 @@ export const useSimilarProducts = () => {
 
 export const fetchNewProducts = async () => {
   const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/products/new`);
-  const data = (await response.json()) as ProductDTO[];
+  const data = (await response.json()) as ProductsListDTO;
 
   return data;
 };
