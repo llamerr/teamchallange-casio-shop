@@ -36,7 +36,7 @@ export function SolarBlock({ className }: SolarBlockProps) {
           {isLoading && Array.from({ length: 4 }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
-          {data && data.pages[0]?.products.map(product => (
+          {data && data.pages[0]?.products.slice(0, 4).map(product => (
             <ProductCard
               key={product.id}
               variant="dark"

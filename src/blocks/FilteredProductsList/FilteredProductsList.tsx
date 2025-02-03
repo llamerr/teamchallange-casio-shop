@@ -1,6 +1,7 @@
 'use client';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@radix-ui/react-select';
+import { useMachine } from '@xstate/react';
 import { RefreshCw } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import React from 'react';
@@ -11,11 +12,19 @@ import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/libs/utils';
 import { useProducts } from '@/services/api/dto/Product/Product.query';
+import { filterMachine } from '@/state/FilterMachine';
 
-import { ProductFilters } from './product-filters';
+import { ProductFilters } from './ProductFilters';
 
 export function FilteredProductsList() {
   const { slug } = useParams<{ slug: string }>();
+  // TODO: get from searchParams
+  const [state, send] = useMachine(filterMachine, { input: {
+    price: [],
+    gender: [],
+    color: [],
+    movement: [],
+  } });
 
   const {
     data,
@@ -24,7 +33,7 @@ export function FilteredProductsList() {
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-  } = useProducts({ collection: slug });
+  } = useProducts({ collection: slug, filters: state.context });
 
   const [showFilters, setShowFilters] = useLocalStorage('show-filters', true);
 
@@ -57,7 +66,7 @@ export function FilteredProductsList() {
       <div className="mx-auto max-w-7xl p-4">
         <div className="flex gap-8">
           <div className={cn('w-64 transition-all duration-300', !showFilters && '-ml-80 hidden')}>
-            <ProductFilters />
+            <ProductFilters state={state} sendAction={send} />
           </div>
 
           <div className="flex-1">

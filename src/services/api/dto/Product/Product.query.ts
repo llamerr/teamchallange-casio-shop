@@ -1,6 +1,7 @@
 import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { Env } from '@/libs/Env';
+import type { FilterState } from '@/state/FilterMachine';
 
 import type { ProductDetailsDTO, ProductsListDTO } from './Product.dto';
 
@@ -17,16 +18,27 @@ export const useProduct = (productSlug: string) => {
   });
 };
 
-export const fetchProducts = async ({ pageParam = 0, collection }: { pageParam: number; collection?: string }) => {
-  const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/products?page=${pageParam}&collection=${collection}`);
+type ProductsParams = {
+  pageParam: number;
+  collection?: string;
+  filters?: Partial<FilterState>;
+};
+export const fetchProducts = async ({ pageParam = 0, collection = '', filters = {} }: ProductsParams) => {
+  const filtersQuery = Object.entries(filters).map(([key, value]) => `${key}=${value}`).join('&');
+  const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/products?page=${pageParam}&collection=${collection}&${filtersQuery}`);
   const data = (await response.json()) as ProductsListDTO;
 
   return data;
 };
-export const useProducts = ({ collection }: { collection?: string }) => {
+export const useProducts = ({ collection, filters }: { collection?: string; filters?: FilterState }) => {
   return useInfiniteQuery({
-    queryKey: ['products', collection],
-    queryFn: ({ pageParam, queryKey }) => fetchProducts({ pageParam, collection: queryKey[1] }),
+    queryKey: ['products', collection, filters],
+    queryFn: ({ pageParam, queryKey }) =>
+      fetchProducts({
+        pageParam,
+        collection: queryKey[1] as string,
+        filters: queryKey[2] as FilterState,
+      }),
     initialPageParam: 0,
     getNextPageParam: lastPage => lastPage.nextPage,
     placeholderData: keepPreviousData,

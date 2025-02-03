@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Env } from '@/libs/Env';
 import type { ProductDetailsDTO, ProductDTO, ProductsListDTO } from '@/services/api/dto/Product/Product.dto';
 import { LANDSCAPE_IMAGES, PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
+import type { FilterState } from '@/state/FilterMachine';
 
 export const products: ProductDTO[] = [
   {
@@ -14,7 +15,7 @@ export const products: ProductDTO[] = [
     collectionSlug: 'g-shock',
     size: '40 mm',
     colors: 3,
-    price: 95.00,
+    price: 40.00,
     originalPrice: 120.00,
     id: 'JY8146-54A',
     slug: 'casio-g-shock-frogman-jy8146-54a',
@@ -27,8 +28,8 @@ export const products: ProductDTO[] = [
     collectionSlug: 'edifice',
     size: '40 mm',
     colors: 3,
-    price: 95.00,
-    originalPrice: 120.00,
+    price: 25.00,
+    originalPrice: 45.00,
     id: 'JY8146-54B',
     slug: 'casio-g-shock-gb5600-jy8146-54b',
   },
@@ -40,8 +41,8 @@ export const products: ProductDTO[] = [
     collectionSlug: 'pro-trek',
     size: '40 mm',
     colors: 3,
-    price: 95.00,
-    originalPrice: 120.00,
+    price: 155.00,
+    originalPrice: 165.00,
     id: 'JY8146-54E',
     slug: 'casio-g-shock-gb5600-jy8146-54e',
   },
@@ -53,7 +54,7 @@ export const products: ProductDTO[] = [
     collectionSlug: 'baby-g',
     size: '42 mm',
     colors: 5,
-    price: 110.00,
+    price: 90.00,
     originalPrice: 150.00,
     id: 'AB1234-XY',
     slug: 'casio-g-shock-ga-100-ab1234-xy',
@@ -82,8 +83,8 @@ export const similarProducts: ProductDTO[] = [
     collectionSlug: 'edifice',
     size: '40 mm',
     colors: 3,
-    price: 95.00,
-    originalPrice: 120.00,
+    price: 120.00,
+    originalPrice: 150.00,
     id: 'JY8147-54B',
     slug: 'casio-g-shock-gb5600-jy8146-54b',
   },
@@ -108,8 +109,8 @@ export const similarProducts: ProductDTO[] = [
     collectionSlug: 'sheen',
     size: '42 mm',
     colors: 5,
-    price: 110.00,
-    originalPrice: 150.00,
+    price: 160.00,
+    originalPrice: 180.00,
     id: 'AB1237-XZ',
     slug: 'casio-baby-g-ba-110-ab1234-xy',
   },
@@ -124,8 +125,8 @@ export const newProducts: ProductDTO[] = [
     collectionSlug: 'g-shock',
     size: '45 mm',
     colors: 3,
-    price: 99.00,
-    originalPrice: 139.00,
+    price: 65.00,
+    originalPrice: 75.00,
     id: 'GA100-1A',
     slug: 'casio-g-shock-ga-100-ga100-1a',
   },
@@ -137,7 +138,7 @@ export const newProducts: ProductDTO[] = [
     collectionSlug: 'edifice',
     size: '45 mm',
     colors: 3,
-    price: 99.00,
+    price: 75.00,
     originalPrice: 139.00,
     id: 'GA2100-1A',
     slug: 'casio-g-shock-ga-2100-ga2100-1a',
@@ -695,9 +696,21 @@ export const productHandlers = [
     const url = new URL(request.url);
     const pageNumber = Number.parseInt(url.searchParams.get('page') || '0', 10);
     const collection = url.searchParams.get('collection');
+    const filters = ['price', 'gender', 'color', 'movement'].reduce((acc, filterName) => ({
+      ...acc,
+      [filterName]: (url.searchParams.get(filterName) && url.searchParams.get(filterName)?.split(',')) || [],
+    }), {}) as Record<keyof FilterState, string[]>;
 
     const filteredProducts = paginatedProducts.products
-      .filter(product => !collection || product.collectionSlug === collection);
+      .filter(product => !collection || product.collectionSlug === collection)
+      .filter(product => !filters.price.length
+        || (filters.price.includes('under50') && product.price < 50)
+        || (filters.price.includes('under100') && (product.price >= 50 && product.price < 100))
+        || (filters.price.includes('under200') && product.price >= 100),
+      );
+      // .filter(product => !filters.gender.length || filters.gender.includes(product.gender))
+      // .filter(product => !filters.color.length || filters.color.includes(product.colors))
+      // .filter(product => !filters.movement.length || filters.movement.includes(product.movement));
 
     const hasNextPage = (pageNumber + 1) * 20 < filteredProducts.length;
 

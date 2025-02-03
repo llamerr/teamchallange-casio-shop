@@ -1,28 +1,28 @@
-import { useMachine } from '@xstate/react';
+'use client';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { filterMachine, type FilterState, type MachineEvents } from '@/state/FilterMachine';
+import type { FilterState, MachineEvents } from '@/state/FilterMachine';
 
 const generateAccordionItem = (
-  value: string,
-  title: string,
-  options: string[],
+  filterName: keyof FilterState,
+  filterTitle: string,
+  options: Record<string, string>,
   currentFilters: string[],
   handleFilterChange: (filterValue: string) => void,
 ) => (
-  <AccordionItem key={value} value={value}>
-    <AccordionTrigger className="text-sm text-blue-800">{title}</AccordionTrigger>
+  <AccordionItem key={filterName} value={filterName}>
+    <AccordionTrigger className="text-sm text-blue-800">{filterTitle}</AccordionTrigger>
     <AccordionContent className="space-y-2">
-      {options.map(value => (
+      {Object.entries(options).map(([value, label]) => (
         <Label key={value} className="flex items-center gap-2 text-blue-800">
           <Checkbox
             checked={currentFilters.includes(value)}
             onCheckedChange={() => handleFilterChange(value)}
           />
-          {value}
+          {label}
         </Label>
       ))}
     </AccordionContent>
@@ -32,39 +32,65 @@ const generateAccordionItem = (
 type Filter = {
   title: string;
   event: MachineEvents['type'];
-  options: string[];
+  options: Record<string, string>;
 };
 const FILTERS: Record<keyof FilterState, Filter> = {
   price: {
     title: 'Price',
     event: 'UPDATE_PRICE',
-    options: ['Under $50', '$50 - $100', '$100 - $200'],
+    options: {
+      under50: 'Under $50',
+      under100: '$50 - $100',
+      under200: '$100 - $200',
+    },
   },
   gender: {
     title: 'Gender',
     event: 'UPDATE_GENDER',
-    options: ['Men', 'Women', 'Unisex'],
+    options: {
+      men: 'Men',
+      women: 'Women',
+      unisex: 'Unisex',
+    },
   },
   color: {
     title: 'Color',
     event: 'UPDATE_COLOR',
-    options: ['Black', 'Blue', 'Silver', 'Gold', 'Red', 'Green', 'Yellow', 'Brown', 'Orange', 'Purple', 'Pink', 'White'],
+    options: {
+      black: 'Black',
+      blue: 'Blue',
+      silver: 'Silver',
+      gold: 'Gold',
+      red: 'Red',
+      green: 'Green',
+      yellow: 'Yellow',
+      brown: 'Brown',
+      orange: 'Orange',
+      purple: 'Purple',
+      pink: 'Pink',
+      white: 'White',
+    },
   },
   movement: {
     title: 'Movement',
     event: 'UPDATE_MOVEMENT',
-    options: ['Solar Quartz', 'Quartz Digital', 'Mechanical', 'Automatic'],
+    options: {
+      solar: 'Solar Quartz',
+      digital: 'Quartz Digital',
+      mechanical: 'Mechanical',
+      automatic: 'Automatic',
+    },
   },
 };
 
-export function ProductFilters() {
-  // TODO: get from searchParams
-  const [state, send] = useMachine(filterMachine, { input: {
-    price: [],
-    gender: [],
-    color: [],
-    movement: [],
-  } });
+export type ProductFiltersProps = {
+  state: {
+    context: FilterState;
+  };
+  sendAction: (event: MachineEvents) => void;
+};
+
+export function ProductFilters({ state, sendAction }: ProductFiltersProps) {
   const filters = state.context;
 
   const handleFilterChange = (filterName: keyof FilterState) => (filterValue: string) => {
@@ -73,18 +99,18 @@ export function ProductFilters() {
       ? currentFilterValue.filter(p => p !== filterValue)
       : [...currentFilterValue, filterValue];
 
-    send({
+    sendAction({
       type: FILTERS[filterName].event,
       payload: newFilterValue,
     });
   };
 
   const handleResetFilters = () => {
-    send({ type: 'RESET_FILTERS' });
+    sendAction({ type: 'RESET_FILTERS' });
   };
 
   const handleApplyFilters = () => {
-    send({ type: 'APPLY_FILTERS' });
+    sendAction({ type: 'APPLY_FILTERS' });
   };
 
   return (
@@ -92,7 +118,7 @@ export function ProductFilters() {
       <Accordion type="multiple" className="space-y-2">
         {Object.entries(FILTERS).map(([name, { title, options }]) => (
           generateAccordionItem(
-            name,
+            name as keyof FilterState,
             title,
             options,
             filters[name as keyof FilterState],

@@ -1,4 +1,4 @@
-import { assign, log, setup } from 'xstate';
+import { assign, setup } from 'xstate';
 
 export type FilterState = {
   price: string[];
@@ -58,9 +58,7 @@ export const filterMachine = setup({
     idle: {
       on: {
         UPDATE_PRICE: {
-          actions: ['updatePrice', log(
-            ({ context, event }) => `machine log: ${context.price}, ${event.payload}`,
-          )],
+          actions: ['updatePrice'],
         },
         UPDATE_GENDER: {
           actions: ['updateGender'],
