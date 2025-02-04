@@ -12,6 +12,12 @@ export type ProductDTO = {
   originalPrice?: number;
 };
 
+export type ProductsListDTO = {
+  products: ProductDTO[];
+  nextPage?: number;
+  totalCount: number;
+};
+
 export type ProductDetailsDTO = ProductDTO & {
   imagePromo: string;
   images: Array<{

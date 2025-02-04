@@ -1,9 +1,9 @@
 import { http, HttpResponse } from 'msw';
 
 import { Env } from '@/libs/Env';
-import type { CollectionDTO } from '@/services/api/dto/Collection.dto';
+import type { CollectionDTO } from '@/services/api/dto/Collection/Collection.dto';
 
-import { PORTRAIT_IMAGES } from '../uploadThingFiles';
+import { LANDSCAPE_IMAGES, PORTRAIT_IMAGES } from '../../uploadThingFiles';
 
 export const collections: CollectionDTO[] = [
   {
@@ -18,6 +18,7 @@ export const collections: CollectionDTO[] = [
     slug: 'baby-g',
     description: 'Tough, stylish, and colorful',
     image: PORTRAIT_IMAGES[10],
+    imageWide: LANDSCAPE_IMAGES[1],
   },
   {
     id: 'edifice',
@@ -25,6 +26,7 @@ export const collections: CollectionDTO[] = [
     slug: 'edifice',
     description: 'Speed and intelligence',
     image: PORTRAIT_IMAGES[9],
+    imageWide: LANDSCAPE_IMAGES[0],
   },
   {
     id: 'pro-trek',
@@ -32,6 +34,7 @@ export const collections: CollectionDTO[] = [
     slug: 'pro-trek',
     description: 'Toughness for the great outdoors',
     image: PORTRAIT_IMAGES[8],
+    imageWide: LANDSCAPE_IMAGES[1],
   },
   {
     id: 'oceanus',
@@ -39,6 +42,7 @@ export const collections: CollectionDTO[] = [
     slug: 'oceanus',
     description: 'High-precision timepieces',
     image: PORTRAIT_IMAGES[7],
+    imageWide: LANDSCAPE_IMAGES[0],
   },
   {
     id: 'sheen',
@@ -46,6 +50,7 @@ export const collections: CollectionDTO[] = [
     slug: 'sheen',
     description: 'Elegance and sophistication',
     image: PORTRAIT_IMAGES[6],
+    imageWide: LANDSCAPE_IMAGES[1],
   },
 ];
 

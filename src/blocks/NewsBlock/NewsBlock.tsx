@@ -2,7 +2,7 @@
 
 import { Grid } from '@/components/Grid/Grid';
 import { Section } from '@/components/Section/Section';
-import { useNewsList } from '@/services/api/dto/News.query';
+import { useNewsList } from '@/services/api/dto/News/News.query';
 
 import { NewsCard } from './NewsCard';
 import { NewsCardSkeleton } from './NewsCardSkeleton';

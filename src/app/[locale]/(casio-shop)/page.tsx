@@ -12,9 +12,9 @@ import { NewsBlock } from '@/blocks/NewsBlock/NewsBlock';
 import { ProductCollections } from '@/blocks/ProductCollections/ProductCollections';
 import { SolarBlock } from '@/blocks/SolarBlock/SolarBlock';
 import { TrustBlock } from '@/blocks/TrustBlock/TrustBlock';
-import { fetchCollections } from '@/services/api/dto/Collection.query';
-import { fetchNewsList } from '@/services/api/dto/News.query';
-import { fetchNewProducts, fetchProducts } from '@/services/api/dto/Product.query';
+import { fetchCollections } from '@/services/api/dto/Collection/Collection.query';
+import { fetchNewsList } from '@/services/api/dto/News/News.query';
+import { fetchNewProducts, fetchProducts } from '@/services/api/dto/Product/Product.query';
 
 type IIndexProps = {
   params: Promise<{ locale: string }>;
@@ -51,7 +51,7 @@ export default async function Index(props: IIndexProps) {
 
   queryClient.prefetchQuery({
     queryKey: ['products'],
-    queryFn: fetchProducts,
+    queryFn: () => fetchProducts,
   });
 
   queryClient.prefetchQuery({

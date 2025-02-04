@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import useHashParam from '@/hooks/useHashParam';
-import { cn } from '@/lib/utils';
-import type { ProductDetailsDTO } from '@/services/api/dto/Product.dto';
+import { cn } from '@/libs/utils';
+import type { ProductDetailsDTO } from '@/services/api/dto/Product/Product.dto';
 
 const tabsData = [
   {

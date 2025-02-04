@@ -10,6 +10,7 @@
     "ms-playwright.playwright",
     "github.vscode-github-actions",
     "lokalise.i18n-ally",
-    "entuent.fira-code-nerd-font"
+    "entuent.fira-code-nerd-font",
+    "statelyai.stately-vscode"
   ]
 }

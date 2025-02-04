@@ -9,8 +9,8 @@ import { Grid } from '@/components/Grid/Grid';
 import { Section } from '@/components/Section/Section';
 import { Button } from '@/components/ui/button';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
-import { cn } from '@/lib/utils';
-import { useProducts } from '@/services/api/dto/Product.query';
+import { cn } from '@/libs/utils';
+import { useProducts } from '@/services/api/dto/Product/Product.query';
 import { VIDEOS } from '@/services/api/uploadThingFiles';
 
 type SolarBlockProps = {
@@ -18,7 +18,7 @@ type SolarBlockProps = {
 };
 
 export function SolarBlock({ className }: SolarBlockProps) {
-  const { data, error, isLoading } = useProducts();
+  const { data, error, isLoading } = useProducts({});
 
   const { videoRef, togglePlay, isPlaying } = useVideoPlayer();
 
@@ -41,7 +41,7 @@ export function SolarBlock({ className }: SolarBlockProps) {
                 skeletonCount={4}
                 className="gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
               >
-                {data && data.map(product => (
+                {data && data.pages[0]?.products.slice(0, 4).map(product => (
                   <ProductCard
                     key={product.id}
                     variant="dark"

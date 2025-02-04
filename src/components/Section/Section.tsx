@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 
 type SectionProps = {
   title: string;

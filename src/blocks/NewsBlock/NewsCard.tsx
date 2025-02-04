@@ -2,7 +2,7 @@ import { ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { NewsDTO } from '@/services/api/dto/News.dto';
+import type { NewsDTO } from '@/services/api/dto/News/News.dto';
 
 type NewsCardProps = Omit<NewsDTO, 'id'> & {
   href: string;

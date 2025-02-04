@@ -7,8 +7,8 @@ import { KeyFeatures } from '@/blocks/KeyFeatures/KeyFeatures';
 import { ProductGallery } from '@/blocks/ProductGallery/ProductGallery';
 import { ProductTabs } from '@/blocks/ProductTabs/ProductTabs';
 import { SimilarProducts } from '@/blocks/SimilarProducts/SimilarProducts';
-import { fetchKeyFeatures } from '@/services/api/dto/KeyFeature.query';
-import { fetchProduct } from '@/services/api/dto/Product.query';
+import { fetchKeyFeatures } from '@/services/api/dto/KeyFeature/KeyFeature.query';
+import { fetchProduct } from '@/services/api/dto/Product/Product.query';
 
 type IIndexProps = {
   params: Promise<{

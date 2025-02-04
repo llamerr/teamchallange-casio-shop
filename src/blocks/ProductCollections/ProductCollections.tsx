@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Grid } from '@/components/Grid/Grid';
 import { Section } from '@/components/Section/Section';
-import { useCollections } from '@/services/api/dto/Collection.query';
+import { useCollections } from '@/services/api/dto/Collection/Collection.query';
 
 import { CollectionCard } from './CollectionCard';
 import { CollectionCardSkeleton } from './CollectionCardSkeleton';
