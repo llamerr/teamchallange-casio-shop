@@ -5,6 +5,7 @@ import { Pause, Play } from 'lucide-react';
 import { ProductCard } from '@/blocks/ProductCard/ProductCard';
 import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
 import { TrustBlock } from '@/blocks/TrustBlock/TrustBlock';
+import { Grid } from '@/components/Grid/Grid';
 import { Section } from '@/components/Section/Section';
 import { Button } from '@/components/ui/button';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
@@ -31,19 +32,24 @@ export function SolarBlock({ className }: SolarBlockProps) {
       />
 
       <Section title="Touch Solar Watches" link={{ href: '/watches', label: 'View all' }} className="mx-20">
-        {error instanceof Error && <p>{error.message}</p>}
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {isLoading && Array.from({ length: 4 }).map((_, i) => (
-            <ProductCardSkeleton key={i} />
-          ))}
-          {data && data.pages[0]?.products.slice(0, 4).map(product => (
-            <ProductCard
-              key={product.id}
-              variant="dark"
-              {...product}
-            />
-          ))}
-        </div>
+        {error instanceof Error
+          ? <p>{error.message}</p>
+          : (
+              <Grid
+                isLoading={isLoading}
+                renderSkeleton={key => <ProductCardSkeleton key={key} />}
+                skeletonCount={4}
+                className="gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+              >
+                {data && data.pages[0]?.products.slice(0, 4).map(product => (
+                  <ProductCard
+                    key={product.id}
+                    variant="dark"
+                    {...product}
+                  />
+                ))}
+              </Grid>
+            )}
       </Section>
 
       <section className="relative flex aspect-[2.13/1] w-full items-center overflow-hidden">

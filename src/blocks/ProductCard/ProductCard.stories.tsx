@@ -100,3 +100,31 @@ export const ProductCardWithoutImage = {
     originalPrice: 89.00,
   },
 } satisfies Story;
+
+export const ProductCardWithoutOriginalPrice = {
+  args: {
+    badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
+    image: PORTRAIT_IMAGES[1],
+    title: 'Casio Baby-G BA-110',
+    slug: 'casio-baby-g-ba-110',
+    collection: 'SOLAR POWERED',
+    collectionSlug: 'solar-powered',
+    size: '43 mm',
+    colors: 5,
+    price: 69.00,
+  },
+} satisfies Story;
+
+export const ProductCardWithLongTitle = {
+  args: {
+    badges: ['New', 'Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant', 'Bestsellers'],
+    image: PORTRAIT_IMAGES[1],
+    title: 'Casio G-SHOCK Classic GMA-P2100BB-1AER Limited Edition | Ultra-Durable Model | Tactical Sport Series #GMA-P2100BB-1AER-EX',
+    slug: 'casio-baby-g-ba-110',
+    collection: 'SOLAR POWERED',
+    collectionSlug: 'solar-powered',
+    size: '43 mm',
+    colors: 5,
+    price: 69.00,
+  },
+} satisfies Story;

@@ -4,6 +4,7 @@ import React from 'react';
 
 import { ProductCard } from '@/blocks/ProductCard/ProductCard';
 import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
+import { Grid } from '@/components/Grid/Grid';
 import { Section } from '@/components/Section/Section';
 import { useSimilarProducts } from '@/services/api/dto/Product/Product.query';
 
@@ -12,18 +13,23 @@ export function SimilarProducts() {
 
   return (
     <Section title="Similar Watches" link={{ href: '/watches', label: 'View all' }}>
-      {error instanceof Error && <p>{error.message}</p>}
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {isLoading && Array.from({ length: 4 }).map((_, i) => (
-          <ProductCardSkeleton key={i} />
-        ))}
-        {data && data.products.map(product => (
-          <ProductCard
-            key={product.id}
-            {...product}
-          />
-        ))}
-      </div>
+      {error instanceof Error
+        ? <p>{error.message}</p>
+        : (
+            <Grid
+              isLoading={isLoading}
+              renderSkeleton={key => <ProductCardSkeleton key={key} />}
+              skeletonCount={4}
+              className="gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+            >
+              {data && data.products.map(product => (
+                <ProductCard
+                  key={product.id}
+                  {...product}
+                />
+              ))}
+            </Grid>
+          )}
     </Section>
   );
 }

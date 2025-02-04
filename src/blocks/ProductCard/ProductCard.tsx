@@ -1,7 +1,7 @@
 'use client';
 
 import { useHover } from '@uidotdev/usehooks';
-import { ImageIcon, Mail } from 'lucide-react';
+import { ImageIcon, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -28,26 +28,17 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
 
   return (
     <Card
-      className={`relative aspect-[0.660/1] rounded-none border border-gray-200 shadow-none transition-colors
-        ${variant === 'dark' ? 'bg-[#1F1F1F]' : 'bg-white'}
-        ${isHovered ? (variant === 'dark' ? 'bg-[#0F0F0F]' : 'bg-gray-100') : ''}
+      className={`relative aspect-[0.660/1] rounded-none border border-[#7983A7] shadow-none transition-colors
+        ${variant === 'dark' ? 'bg-[#111321]' : 'bg-[#F0F0F1]'} 
+        text-[16px] max-3xl:text-[13px] max-2xl:text-[10px] max-xl:text-[7px]
       `}
       ref={ref}
     >
-      <CardContent className="p-4">
-        <div className="mb-4 flex flex-wrap gap-2">
-          {badges.map(badge => (
-            <span
-              key={badge}
-              className={`border- border${variant === 'dark' ? 'gray-700' : 'gray-300'} bg-${variant === 'dark' ? 'gray-800' : 'white'} px-2 py-1 text-xs
-                ${variant === 'dark' ? 'text-white' : 'text-black'}
-              `}
-            >
-              {badge}
-            </span>
-          ))}
-        </div>
-        <div className="relative mb-4 flex aspect-square items-center justify-center bg-muted dark:bg-gray-800">
+      <CardContent className="relative aspect-square">
+        <div className={`absolute inset-0 flex items-center justify-center ${
+          isHovered ? 'bg-[#111321] text-[#F0F0F1]' : 'bg-[#F0F0F1] text-[#111321]'
+        }`}
+        >
           {image && (
             <Image
               src={image}
@@ -61,43 +52,79 @@ export const ProductCard: React.FC<ProductCardProps> = function ProductCard({
             <ImageIcon className="size-8" />
           )}
         </div>
-        <div className="space-y-2">
-          <h3 className="text-xl font-medium leading-tight">
-            <Link href={`/product/${slug}`}>
-              {title}
-            </Link>
-          </h3>
-          <div className={`text-sm ${variant === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
+        <div className="absolute flex flex-wrap gap-1.5 p-3">
+          {badges.map(badge => (
+            <span
+              key={badge}
+              className="border border-[#7983A7] bg-[#F3F3F3] px-1 py-px text-[1em] text-[#111321]"
+            >
+              {badge}
+            </span>
+          ))}
+        </div>
+      </CardContent>
+      <CardFooter className="flex aspect-[1/0.5] flex-col justify-between p-[0.75em]">
+        <h3 className={`line-clamp-2 h-[2.8em] text-[2em] font-normal leading-tight 
+          ${variant === 'dark' ? 'text-[#F3F3F3]' : 'text-[#111321]'}
+        `}
+        >
+          <Link href={`/product/${slug}`}>
+            {title}
+          </Link>
+        </h3>
+        <div className={`text-[1.25em] ${variant === 'dark' ? 'text-[#B1B7CB]' : 'text-[#7983A7]'}`}>
+          <div>
             {collection}
           </div>
-          <div className={`text-sm ${variant === 'dark' ? 'text-gray-400' : 'text-muted-foreground'}`}>
+          <div>
             {size}
             {' '}
             |
+            {' '}
             {colors}
+            {' '}
+            Colors
           </div>
         </div>
-      </CardContent>
-      <CardFooter className="flex items-center justify-between p-4 pt-0">
-        <div className="flex items-center gap-2">
-          <span className="text-xl font-bold">
-            {price}
-          </span>
-          {originalPrice && <span className={`text-sm ${variant === 'dark' ? 'text-red-400' : 'text-red-500'} line-through`}>{originalPrice}</span>}
-        </div>
-        {isHovered && (
-          <div className="flex gap-2">
-            <button className={`border- border${variant === 'dark' ? 'gray-700' : 'gray-300'} bg-${variant === 'dark' ? 'gray-800' : 'white'} px-4 py-2 text-sm
-              ${variant === 'dark' ? 'text-white' : 'text-black'}
+        <div className="flex items-center justify-between">
+          <div className="flex items-start gap-[0.25em]">
+            <span className={`text-[2em] 
+              ${variant === 'dark' ? 'text-[#F3F3F3]' : 'text-[#111321]'} font-bold
             `}
+            >
+              $
+              {price.toLocaleString('en', { minimumFractionDigits: 2 })}
+            </span>
+            {originalPrice && (
+              <span className="text-[1.25em] text-[#B3261E] line-through">
+                $
+                {originalPrice.toLocaleString('en', { minimumFractionDigits: 2 })}
+              </span>
+            )}
+          </div>
+          <div className={`flex ${isHovered ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
+            <button
+              type="button"
+              className={`border px-[1.5em] text-[1em] ${
+                variant === 'dark'
+                  ? 'border-[#F3F3F3] bg-[#111321] text-[#F3F3F3]'
+                  : 'border-[#111321] bg-[#F3F3F3] text-[#111321]'
+              }`}
             >
               Compare
             </button>
-            <button className={`bg-${variant === 'dark' ? 'white' : 'black'} text- p-2${variant === 'dark' ? 'black' : 'white'}`}>
-              <Mail className="size-4" />
+            <button
+              type="button"
+              className={`p-[0.75em] ${
+                variant === 'dark'
+                  ? 'bg-[#F3F3F3] text-[#111321]'
+                  : 'bg-[#111321] text-[#F3F3F3]'
+              }`}
+            >
+              <ShoppingBag className="size-[1.5em]" />
             </button>
           </div>
-        )}
+        </div>
       </CardFooter>
     </Card>
   );

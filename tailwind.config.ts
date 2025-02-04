@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        xsm: '375px',
+        'xsm': '375px',
+        '3xl': '1825px',
       },
       fontFamily: {
         sans: [
