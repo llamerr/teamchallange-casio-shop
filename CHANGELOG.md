@@ -1,3 +1,13 @@
+# [1.4.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.3.0...v1.4.0) (2025-02-04)
+
+
+### Features
+
+* add CollectionList and SmallCollectionCard ([1daea6a](https://github.com/llamerr/teamchallange-casio-shop/commit/1daea6a609f9774cdf9bd1b546877be839efa9d8))
+* add filter state, add product list with infinite pagination ([8789c44](https://github.com/llamerr/teamchallange-casio-shop/commit/8789c446559d2e9f561f2d8f125ac781ae3f4134))
+* add HeroCollection ([b781399](https://github.com/llamerr/teamchallange-casio-shop/commit/b7813994061c7b14e53cf5757d55318770c3754a))
+* apply filter to queries ([efc387a](https://github.com/llamerr/teamchallange-casio-shop/commit/efc387a6cb52db7444165546d1be847722a44b0c))
+
 # [1.3.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.2.0...v1.3.0) (2025-01-30)
 
 
