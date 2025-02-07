@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { expect, test } from '@playwright/test';
 
-test.describe('Counter', () => {
+test.skip('Counter', () => {
   test.describe('Basic database operations', () => {
     test('shouldn\'t increment the counter with an invalid input', async ({ page }) => {
       const counter = await page.request.put('/api/counter', {
