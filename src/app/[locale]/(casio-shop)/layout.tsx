@@ -1,5 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 
+import { CookieConsentProvider } from '@/components/CookieConsent/CookieConsentProvider';
 import { ShopTemplate } from '@/templates/ShopTemplate';
 
 export default async function ProductLayout(props: {
@@ -11,6 +12,7 @@ export default async function ProductLayout(props: {
 
   return (
     <ShopTemplate>
+      <CookieConsentProvider />
       {props.children}
     </ShopTemplate>
   );
