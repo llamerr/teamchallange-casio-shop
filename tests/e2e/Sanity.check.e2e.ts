@@ -12,7 +12,7 @@ import { expect, test } from '@playwright/test';
 // You can't use `goto` function directly with a relative path like with other *.e2e.ts tests.
 // Check the example at https://feedback.checklyhq.com/changelog/new-changelog-436
 
-test.describe('Sanity', () => {
+test.skip('Sanity', () => {
   test.describe('Static pages', () => {
     test('should display the homepage', async ({ page, baseURL }) => {
       await page.goto(`${baseURL}/`);

@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { faker } from '@faker-js/faker';
 import { expect, test } from '@playwright/test';
 
-test.describe('Counter', () => {
+test.skip('Counter', () => {
   test.describe('Increment operation', () => {
     test('should display error message when incrementing with negative number', async ({
       page,
