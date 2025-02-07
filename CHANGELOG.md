@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.4.0...v1.5.0) (2025-02-07)
+
+
+### Features
+
+* add first iteration of cookie consent popup, add mock privacy policy page ([5d3d69f](https://github.com/llamerr/teamchallange-casio-shop/commit/5d3d69f3d87be99aae41524daaccbd264edc6bac))
+
 # [1.4.0](https://github.com/llamerr/teamchallange-casio-shop/compare/v1.3.0...v1.4.0) (2025-02-04)
 
 
