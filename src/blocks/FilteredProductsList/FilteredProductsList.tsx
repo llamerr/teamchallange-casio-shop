@@ -40,7 +40,7 @@ export function FilteredProductsList() {
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-10 p-4">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <div className="mx-auto flex items-center justify-between">
           <Button variant="ghost" onClick={() => setShowFilters(!showFilters)}>
             {showFilters ? 'Hide' : 'Show'}
             {' '}
@@ -63,7 +63,7 @@ export function FilteredProductsList() {
         </div>
       </header>
 
-      <div className="mx-auto max-w-7xl p-4">
+      <div className="mx-auto p-4">
         <div className="flex gap-8">
           <div className={cn('w-64 transition-all duration-300', !showFilters && '-ml-80 hidden')}>
             <ProductFilters state={state} sendAction={send} />

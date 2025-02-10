@@ -221,7 +221,7 @@ export function ProductGallery({ images }: ProductGalleryProps) {
           </DialogDescription>
         </DialogHeader>
         <DialogContent
-          className="flex h-[80vh] max-w-7xl items-center justify-center"
+          className="flex h-[80vh] max-w-full items-center justify-center"
           onKeyDown={handleKeyDown}
         >
           <div className="relative size-full">
