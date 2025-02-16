@@ -10,7 +10,7 @@ export type LogoProps = {
 
 export const Logo: React.FC<LogoProps> = function Logo({ variant = 'dark' }) {
   return (
-    <Link href="/" className="shrink-0">
+    <Link href="/" className="mr-8 shrink-0">
       <Image
         src={variant === 'dark' ? ImgDark : ImgLight}
         alt="Casio"
