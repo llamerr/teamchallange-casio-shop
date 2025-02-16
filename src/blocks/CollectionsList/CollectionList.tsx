@@ -17,8 +17,9 @@ export function CollectionList() {
       {data && data.map(collection => (
         <SmallCollectionCard
           key={collection.id}
+          title={collection.title}
           href={`/collections/${collection.id}`}
-          {...collection}
+          image={collection.imageWide || collection.image}
           isActive={collection.id === slug}
         />
       ))}
