@@ -12,11 +12,22 @@ export const PORTRAIT_IMAGES = [
   'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYeUSprUVwfRYkBsbaEu4no9jiThQlW2rM1xK0',
   'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYW1pvRpQ4Px9XtbTmpE1VjvCgwQSBazA5fqcs',
   'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYGkWs1dI08fdOtvRu97WAj52QYbrI6VEZSXek',
+  'https://picsum.photos/id/74/400/552',
+  'https://picsum.photos/id/75/400/552',
+  'https://picsum.photos/id/41/400/552',
+  'https://picsum.photos/id/19/400/552',
+  'https://picsum.photos/id/14/400/552',
 ] as const;
 
 export const LANDSCAPE_IMAGES = [
   'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYXaqfkiL3HZdv4qR56pWGYb2cm1PK97XrnFCf',
   'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYYwVXEuTeaPrAhulQT6GBXj0ceUbg5wVJMI2t',
+  'https://picsum.photos/id/63/768/288',
+  'https://picsum.photos/id/56/768/288',
+  'https://picsum.photos/id/34/768/288',
+  'https://picsum.photos/id/28/768/288',
+  'https://picsum.photos/id/21/768/288',
+  'https://picsum.photos/id/6/768/288',
 ] as const;
 
 export const VIDEOS = [
