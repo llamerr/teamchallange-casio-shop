@@ -5,3 +5,14 @@ export type NewsDTO = {
   description: string;
   href: string;
 };
+
+export type NewsListDTO = {
+  news: NewsDTO[];
+  nextPage?: number;
+  totalCount: number;
+};
+
+export type NewsDetailsDTO = NewsDTO & {
+  content: string;
+  date: string;
+};
