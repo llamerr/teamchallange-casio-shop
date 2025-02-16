@@ -21,6 +21,7 @@ export function FilteredProductsList() {
   // TODO: get from searchParams
   const [state, send] = useMachine(filterMachine, { input: {
     price: [],
+    features: [],
     gender: [],
     color: [],
     movement: [],
