@@ -11,7 +11,7 @@ import { cn } from '@/libs/utils';
 import type { MetaCollection } from '@/services/api/dto/Collection/Collection.dto';
 import { fetchCollections, useCollections } from '@/services/api/dto/Collection/Collection.query';
 import { PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
-import { FILTERS as PRODUCT_FILTERS } from '@/state/FilterMachine';
+import { type FilterKeys, FILTERS as PRODUCT_FILTERS } from '@/state/FilterMachine';
 
 const FILTERS: Partial<Record<MetaCollection, { title: string; image: string }>> = {
   'for-men': {
@@ -41,15 +41,28 @@ type MegaMenuItem = {
   value: string;
 };
 
-const features: MegaMenuItem[] = Object.entries(PRODUCT_FILTERS.features.options).map(([value, title]) => ({
-  title,
-  value,
-}));
-
-const prices: MegaMenuItem[] = Object.entries(PRODUCT_FILTERS.price.options).map(([value, title]) => ({
-  title,
-  value,
-}));
+const COLUMNS: Array<{
+  key: FilterKeys;
+  title: string;
+  items: MegaMenuItem[];
+}> = [
+  {
+    key: 'features',
+    title: 'Featured',
+    items: Object.entries(PRODUCT_FILTERS.features.options).map(([value, title]) => ({
+      title,
+      value,
+    })),
+  },
+  {
+    key: 'price',
+    title: 'Price',
+    items: Object.entries(PRODUCT_FILTERS.price.options).map(([value, title]) => ({
+      title,
+      value,
+    })),
+  },
+];
 
 export default function WatchesContent() {
   const [activeTab, setActiveTab] = useState<MetaCollection>('for-men');
@@ -84,34 +97,22 @@ export default function WatchesContent() {
               ))}
             </nav>
           </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-medium text-gray-900">Featured</h3>
-            <nav className="flex flex-col gap-3">
-              {features.map(item => (
-                <Link
-                  key={item.title}
-                  href={`/collections/${activeTab}?feature=${item.value}`}
-                  className="font-medium text-gray-600 transition-colors hover:text-gray-900"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-xl font-medium text-gray-900">Price</h3>
-            <nav className="flex flex-col gap-3">
-              {prices.map(item => (
-                <Link
-                  key={item.value}
-                  href={`/collections/${activeTab}?price=${item.value}`}
-                  className="font-medium text-gray-600 transition-colors hover:text-gray-900"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          {COLUMNS.map(column => (
+            <div key={column.key} className="flex flex-col gap-4">
+              <h3 className="text-xl font-medium text-gray-900">{column.title}</h3>
+              <nav className="flex flex-col gap-3">
+                {column.items.map(item => (
+                  <Link
+                    key={item.title}
+                    href={`/collections/${activeTab}?${column.key}=${item.value}`}
+                    className="font-medium text-gray-600 transition-colors hover:text-gray-900"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          ))}
         </div>
         <div className="flex justify-end border-gray-200">
           <Link
