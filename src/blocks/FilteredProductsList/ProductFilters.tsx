@@ -1,9 +1,13 @@
 'use client';
 
+import { isEqual, uniq } from 'lodash';
+import { useEffect, useState } from 'react';
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { useQueryParams } from '@/hooks/useQueryParams';
 import { type AllMachineEvents, type FilterKeys, FILTERS, type FilterState, type OptionsFor } from '@/state/FilterMachine';
 
 const generateAccordionItem = <Key extends FilterKeys>({
@@ -44,6 +48,24 @@ export type ProductFiltersProps = {
 
 export function ProductFilters({ state, sendAction }: ProductFiltersProps) {
   const filters = state.context;
+  const [expandedFilters, setExpandedFilters] = useState<FilterKeys[]>(
+    (Object.keys(filters) as FilterKeys[]).filter(p => filters[p].length > 0),
+  );
+
+  const { get, set: setQueryParams } = useQueryParams();
+
+  // When navigating from header, we update active filters from url, which should expand them
+  useEffect(() => {
+    const newExpandedFilters = uniq([
+      ...expandedFilters,
+      ...(Object.keys(filters) as FilterKeys[]).filter(p => filters[p].length > 0),
+    ]);
+    // but prevent update when user manually expanded or collapsed something
+    if (typeof get('expandedFilters') === 'undefined' && !isEqual(expandedFilters, newExpandedFilters)) {
+      setExpandedFilters(newExpandedFilters);
+      setQueryParams('expandedFilters', expandedFilters);
+    }
+  }, [filters, expandedFilters, get, setQueryParams]);
 
   const handleFilterChange = <Key extends FilterKeys>(filterName: Key) => (filterValue: OptionsFor<Key>) => {
     const currentFilterValue = filters[filterName];
@@ -55,6 +77,8 @@ export function ProductFilters({ state, sendAction }: ProductFiltersProps) {
       type: FILTERS[filterName].event,
       payload: newFilterValue,
     } as Extract<AllMachineEvents, { type: typeof FILTERS[Key]['event'] }>);
+
+    setQueryParams(filterName, newFilterValue);
   };
 
   const handleResetFilters = () => {
@@ -67,7 +91,15 @@ export function ProductFilters({ state, sendAction }: ProductFiltersProps) {
 
   return (
     <div className="space-y-4">
-      <Accordion type="multiple" className="space-y-2">
+      <Accordion
+        type="multiple"
+        value={expandedFilters}
+        onValueChange={(value) => {
+          setExpandedFilters(value as FilterKeys[]);
+          setQueryParams('expandedFilters', value.length > 0 ? value : ['']);
+        }}
+        className="space-y-2"
+      >
         {Object.entries(FILTERS).map(([name, { title, options }]) => (
           generateAccordionItem({
             filterName: name as FilterKeys,

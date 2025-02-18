@@ -2,9 +2,10 @@
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@radix-ui/react-select';
 import { useMachine } from '@xstate/react';
+import { isEqual } from 'lodash';
 import { RefreshCw } from 'lucide-react';
-import { useParams } from 'next/navigation';
-import React from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 import { ProductCard } from '@/blocks/ProductCard/ProductCard';
@@ -12,20 +13,55 @@ import { ProductCardSkeleton } from '@/blocks/ProductCard/ProductCardSkeleton';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/libs/utils';
 import { useProducts } from '@/services/api/dto/Product/Product.query';
-import { filterMachine } from '@/state/FilterMachine';
+import { type ColorOptions, type FeaturesOptions, filterMachine, type FilterState, type GenderOptions, type MovementOptions, type PriceOptions } from '@/state/FilterMachine';
 
 import { ProductFilters } from './ProductFilters';
 
 export function FilteredProductsList() {
   const { slug } = useParams<{ slug: string }>();
-  // TODO: get from searchParams
-  const [state, send] = useMachine(filterMachine, { input: {
-    price: [],
-    features: [],
-    gender: [],
-    color: [],
-    movement: [],
-  } });
+  const searchParams = useSearchParams();
+
+  const [activeFilters, setActiveFilters] = useState<FilterState>({
+    price: searchParams.getAll('price') as PriceOptions[] || [],
+    features: searchParams.getAll('features') as FeaturesOptions[] || [],
+    gender: searchParams.getAll('gender') as GenderOptions[] || [],
+    color: searchParams.getAll('color') as ColorOptions[] || [],
+    movement: searchParams.getAll('movement') as MovementOptions[] || [],
+  });
+
+  // TODO: add zod validation of params
+
+  // get initial values from search params
+  const [state, send, actor] = useMachine(filterMachine, { input: activeFilters });
+
+  useEffect(() => {
+    const subscription = actor.subscribe((event) => {
+      if (event.value === 'filtering') {
+        setActiveFilters(event.context);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [actor]);
+
+  // maintain state on search params change
+  useEffect(() => {
+    if (!isEqual(state.context.price, searchParams.getAll('price'))) {
+      send({ type: 'UPDATE_PRICE', payload: searchParams.getAll('price') as PriceOptions[] });
+    }
+    if (!isEqual(state.context.features, searchParams.getAll('features'))) {
+      send({ type: 'UPDATE_FEATURES', payload: searchParams.getAll('features') as FeaturesOptions[] });
+    }
+    if (!isEqual(state.context.gender, searchParams.getAll('gender'))) {
+      send({ type: 'UPDATE_GENDER', payload: searchParams.getAll('gender') as GenderOptions[] });
+    }
+    if (!isEqual(state.context.color, searchParams.getAll('color'))) {
+      send({ type: 'UPDATE_COLOR', payload: searchParams.getAll('color') as ColorOptions[] });
+    }
+    if (!isEqual(state.context.movement, searchParams.getAll('movement'))) {
+      send({ type: 'UPDATE_MOVEMENT', payload: searchParams.getAll('movement') as MovementOptions[] });
+    }
+  }, [searchParams, state.context, send]);
 
   const {
     data,
@@ -34,7 +70,7 @@ export function FilteredProductsList() {
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-  } = useProducts({ collection: slug, filters: state.context });
+  } = useProducts({ collection: slug, filters: activeFilters });
 
   const [showFilters, setShowFilters] = useLocalStorage('show-filters', true);
 

@@ -1,12 +1,12 @@
 import { assign, setup } from 'xstate';
 
-type PriceOptions = 'under50' | 'under100' | 'under200';
-type FeaturesOptions = 'bluetooth' | 'altimeter' | 'pressure' | 'temperature' | 'step-tracker' | 'heart-rate';
-type GenderOptions = 'men' | 'women' | 'unisex';
-type ColorOptions = 'black' | 'blue' | 'silver' | 'gold' | 'red' | 'green' | 'yellow' | 'brown' | 'orange' | 'purple' | 'pink' | 'white';
-type MovementOptions = 'solar' | 'digital' | 'mechanical' | 'automatic';
+export type PriceOptions = 'under50' | 'under100' | 'under200';
+export type FeaturesOptions = 'bluetooth' | 'altimeter' | 'pressure' | 'temperature' | 'step-tracker' | 'heart-rate';
+export type GenderOptions = 'men' | 'women' | 'unisex';
+export type ColorOptions = 'black' | 'blue' | 'silver' | 'gold' | 'red' | 'green' | 'yellow' | 'brown' | 'orange' | 'purple' | 'pink' | 'white';
+export type MovementOptions = 'solar' | 'digital' | 'mechanical' | 'automatic';
 
-type FilterOptions = {
+export type FilterOptions = {
   price: PriceOptions;
   features: FeaturesOptions;
   gender: GenderOptions;
