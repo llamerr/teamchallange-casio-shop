@@ -2,10 +2,12 @@ import { ImageIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import type { CollectionDTO } from '@/services/api/dto/Collection/Collection.dto';
+import { cn } from '@/libs/utils';
 
-type SmallCollectionCardProps = Omit<CollectionDTO, 'id'> & {
+type SmallCollectionCardProps = {
+  title: string;
   href: string;
+  image?: string;
   isActive?: boolean;
 };
 
@@ -25,7 +27,7 @@ export const SmallCollectionCard: React.FC<SmallCollectionCardProps> = function 
             alt={title}
             fill
             sizes="33vw"
-            className="object-cover"
+            className={cn('object-cover', !isActive && 'grayscale')}
           />
         )}
         {!image && (

@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { Env } from '@/libs/Env';
 
-import type { NewsDTO } from './News.dto';
+import type { NewsDetailsDTO, NewsDTO } from './News.dto';
 
 export const fetchNews = async (newsId: string) => {
   const response = await fetch(`${Env.NEXT_PUBLIC_API_URL}/api/news/${newsId}`);
-  const data = (await response.json()) as NewsDTO;
+  const data = (await response.json()) as NewsDetailsDTO;
 
   return data;
 };

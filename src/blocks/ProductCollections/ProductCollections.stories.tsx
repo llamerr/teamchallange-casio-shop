@@ -12,7 +12,7 @@ const meta = {
       type: 'string',
       control: { type: 'text' },
     },
-    description: {
+    slogan: {
       type: 'string',
       control: { type: 'text' },
     },
@@ -41,7 +41,7 @@ export const CollectionCardWithImage = {
   args: {
     title: 'G-Shock',
     slug: 'g-shock',
-    description: 'Toughness meets bold style',
+    slogan: 'Toughness meets bold style',
     href: '/collections/g-shock',
     image: PORTRAIT_IMAGES[0],
   },

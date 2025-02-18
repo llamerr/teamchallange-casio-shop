@@ -6,6 +6,8 @@ import type { ProductDetailsDTO, ProductDTO, ProductsListDTO } from '@/services/
 import { LANDSCAPE_IMAGES, PORTRAIT_IMAGES } from '@/services/api/uploadThingFiles';
 import type { FilterState } from '@/state/FilterMachine';
 
+import { metaCollections } from '../Collection/Collection.mock';
+
 export const products: ProductDTO[] = [
   {
     badges: ['Limited', 'Bluetooth', 'Touch Solar', 'Water Resistant'],
@@ -702,7 +704,7 @@ export const productHandlers = [
     }), {}) as Record<keyof FilterState, string[]>;
 
     const filteredProducts = paginatedProducts.products
-      .filter(product => !collection || product.collectionSlug === collection)
+      .filter(product => !collection || product.collectionSlug === collection || Object.keys(metaCollections).includes(collection))
       .filter(product => !filters.price.length
         || (filters.price.includes('under50') && product.price < 50)
         || (filters.price.includes('under100') && (product.price >= 50 && product.price < 100))

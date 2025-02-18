@@ -36,6 +36,12 @@ export default withSentryConfig(
           },
         ],
       },
+      experimental: {
+        staleTimes: {
+          dynamic: 60, // Cache dynamic routes for 60 seconds
+          static: 300, // Cache static routes for 300 seconds
+        },
+      },
     }),
   ),
   {

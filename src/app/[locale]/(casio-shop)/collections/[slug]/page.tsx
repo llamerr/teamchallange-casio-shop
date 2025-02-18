@@ -27,21 +27,17 @@ export async function generateMetadata(props: IIndexProps) {
   };
 }
 
-// always try to find default slug, even if one is not provided
-const DEFAULT_SLUG = 'g-shock';
-// but if we unable to find a slug, use default value and empty filters
-// isntead of just showing 404 or some error
 const DEFAULT_DESCRIPTION = 'Choose Casio. Discover the perfect timepiece for you.';
 
 export default async function Index(props: IIndexProps) {
-  const { slug = DEFAULT_SLUG, locale } = await props.params;
+  const { slug, locale } = await props.params;
   setRequestLocale(locale);
 
   const queryClient = new QueryClient();
 
   const collections = await queryClient.fetchQuery({
     queryKey: ['collections'],
-    queryFn: () => fetchCollections(),
+    queryFn: () => fetchCollections({}),
   });
 
   // TODO: replace with state inside child component to keep static collections SSG and updated SSR

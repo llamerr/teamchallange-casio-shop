@@ -41,7 +41,7 @@ export default async function Index(props: IIndexProps) {
 
   queryClient.prefetchQuery({
     queryKey: ['collections'],
-    queryFn: fetchCollections,
+    queryFn: () => fetchCollections({}),
   });
 
   queryClient.prefetchQuery({

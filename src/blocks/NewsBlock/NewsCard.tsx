@@ -30,17 +30,19 @@ export const NewsCard: React.FC<NewsCardProps> = function NewsCard({
           <ImageIcon className="size-8" />
         )}
       </div>
-      <Link
-        href={href}
-        className="z-10 flex size-full flex-col items-start justify-end p-16 text-white transition-colors sm:p-4"
-      >
-        <div className="w-10/12 space-y-2">
-          <h3 className="w-10/12 truncate text-3xl font-semibold transition-colors group-hover:text-gray-300">
-            {title}
-          </h3>
-          <p className="truncate text-xl text-gray-400">{description}</p>
-        </div>
-      </Link>
+      <div className="absolute bottom-0 w-full bg-slate-200/60">
+        <Link
+          href={href}
+          className="z-10 flex size-full flex-col items-start justify-end p-16 text-[#111321] transition-colors sm:p-4"
+        >
+          <div className="w-10/12 space-y-2">
+            <h3 className="w-10/12 truncate text-xl font-medium transition-colors">
+              {title}
+            </h3>
+            <p className="line-clamp-3 text-base font-medium text-[#7983A7]">{description}</p>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };

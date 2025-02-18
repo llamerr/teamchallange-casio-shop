@@ -4,13 +4,13 @@ import Link from 'next/link';
 
 import type { CollectionDTO } from '@/services/api/dto/Collection/Collection.dto';
 
-type CollectionCardProps = Omit<CollectionDTO, 'id'> & {
+type CollectionCardProps = Omit<CollectionDTO, 'id' | 'description'> & {
   href: string;
 };
 
 export const CollectionCard: React.FC<CollectionCardProps> = function CollectionCard({
   title,
-  description,
+  slogan,
   href,
   image,
 }) {
@@ -38,7 +38,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = function Collection
           <h3 className="w-10/12 truncate text-3xl font-semibold transition-colors group-hover:text-gray-300">
             {title}
           </h3>
-          <p className="truncate text-xl text-gray-400">{description}</p>
+          <p className="truncate text-xl text-gray-400">{slogan}</p>
         </div>
       </Link>
     </div>

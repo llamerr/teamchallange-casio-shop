@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 import { Env } from '@/libs/Env';
 
-import type { NewsDTO } from './News.dto';
+import type { NewsDetailsDTO, NewsDTO } from './News.dto';
 
 export const news: NewsDTO[] = [
   {
@@ -49,8 +49,21 @@ export const news: NewsDTO[] = [
   },
 ];
 
+export const newsDetails: NewsDetailsDTO = {
+  id: '1',
+  image: 'https://picsum.photos/536/354',
+  title: 'The art of watchmaking',
+  description: 'Discover the craftsmanship and precision that goes into creating a high-quality timepiece.',
+  content: 'The art of watchmaking',
+  href: 'the-art-of-watchmaking',
+  date: '2024-01-01',
+};
+
 export const newsHandlers = [
   http.get(`${Env.NEXT_PUBLIC_API_URL}/api/news`, () => {
     return HttpResponse.json(news);
+  }),
+  http.get(`${Env.NEXT_PUBLIC_API_URL}/api/news/:id`, () => {
+    return HttpResponse.json(newsDetails);
   }),
 ];
