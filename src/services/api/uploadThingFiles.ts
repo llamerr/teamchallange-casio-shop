@@ -31,6 +31,6 @@ export const LANDSCAPE_IMAGES = [
 ] as const;
 
 export const VIDEOS = [
-  'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYuzVjJqkOwsazxZgkH7CmI6byMJqi5WTXrdcl',
-  'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYS3D3VS72g8PDJxedV9OtiFHvB3soClSIaY40',
+  'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYHK0HNRtyK6UEWMxaD1sRpnLXdVtObGm3NIqu',
+  'https://qujblijcjy.ufs.sh/f/oM0zaDGq1OeYz4fbAql8graEnplLC6YT7AjuxRh0ySePfdUH',
 ] as const;
